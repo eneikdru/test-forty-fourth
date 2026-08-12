@@ -1,0 +1,5 @@
+com/eneik/production/FullTextSearchTest.class
+com/eneik/production/MaterialsIntegrationTest.class
+com/eneik/production/SearchIntegrationTest.class
+com/eneik/production/MaterialsApiContractTest.class
+com/eneik/production/SearchApiContractTest.class
