@@ -1,0 +1,161 @@
+openapi: 3.0.3
+info:
+  title: EpiTrack Materials Search API Contract
+  description: Shared API contract for searching and filtering epidemiological materials, protocols, and data.
+  version: 1.0.0
+paths:
+  /api/materials/search:
+    get:
+      summary: Search and filter epidemiological materials
+      description: Returns a paginated list of materials matching the search query, category, and status filters.
+      parameters:
+        - name: q
+          in: query
+          description: Full-text search query term matching against title and content.
+          required: false
+          schema:
+            type: string
+        - name: category
+          in: query
+          description: Filter materials by category (e.g., 'Viral Strains', 'Bacterial Cultures', 'Antibodies').
+          required: false
+          schema:
+            type: string
+        - name: status
+          in: query
+          description: Filter materials by validation or review status.
+          required: false
+          schema:
+            type: string
+            enum: [Analyzed, Pending, Archived, Urgent]
+        - name: sort
+          in: query
+          description: Sorting criteria (e.g., 'updated_at,desc' or 'title,asc').
+          required: false
+          schema:
+            type: string
+            default: updated_at,desc
+        - name: page
+          in: query
+          description: Page number for pagination (1-based).
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            default: 1
+        - name: limit
+          in: query
+          description: Number of items per page.
+          required: false
+          schema:
+            type: integer
+            minimum: 1
+            maximum: 100
+            default: 10
+      responses:
+        '200':
+          description: A successful search response containing the paginated list of materials.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SearchResponse'
+        '400':
+          description: Bad request due to invalid parameter values or schema violations.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '500':
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+components:
+  schemas:
+    MaterialDTO:
+      type: object
+      required:
+        - id
+        - title
+        - content
+        - updated_at
+        - category
+        - status
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier of the material.
+          example: 1
+        title:
+          type: string
+          description: Title of the epidemiological material.
+          example: "Influenza A(H1N1) Surveillance Protocol v3.2"
+        content:
+          type: string
+          description: Comprehensive content or description.
+          example: "Standard operating procedure for the detection, reporting, and preliminary epidemiological investigation of suspected human cases..."
+        category:
+          type: string
+          description: Category classification of the material.
+          example: "Viral Strains"
+        status:
+          type: string
+          description: Current lifecycle or validation status.
+          enum: [Analyzed, Pending, Archived, Urgent]
+          example: "Analyzed"
+        updated_at:
+          type: string
+          format: date-time
+          description: Timestamp of the last update.
+          example: "2023-10-12T00:00:00Z"
+    SearchResponse:
+      type: object
+      required:
+        - items
+        - total
+        - page
+        - limit
+        - pages
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/MaterialDTO'
+        total:
+          type: integer
+          description: Total number of matching items.
+          example: 42
+        page:
+          type: integer
+          description: Current page number.
+          example: 1
+        limit:
+          type: integer
+          description: Maximum number of items per page.
+          example: 10
+        pages:
+          type: integer
+          description: Total number of available pages.
+          example: 5
+    ErrorResponse:
+      type: object
+      required:
+        - error
+        - message
+        - timestamp
+      properties:
+        error:
+          type: string
+          description: Canonical error code or status representation.
+          example: "BAD_REQUEST"
+        message:
+          type: string
+          description: User-friendly message explaining the error details.
+          example: "Invalid page parameter: must be greater than or equal to 1"
+        timestamp:
+          type: string
+          format: date-time
+          description: ISO timestamp of the error event.
+          example: "2026-08-12T16:38:26Z"
