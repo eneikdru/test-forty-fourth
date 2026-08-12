@@ -1,0 +1,12 @@
+{
+  "testsRun": 16,
+  "testsPassed": 16,
+  "testsFailed": 0,
+  "acceptanceCriteriaVerified": [
+    "Given the automated test suite, When the unit tests for material logic are executed, Then all tests pass without errors.",
+    "Given the end-to-end framework, When a test script creates and updates a material, Then the UI correctly reflects all changes."
+  ],
+  "coverageDeltaPercent": null,
+  "verdict": "pass",
+  "notes": "Verified backend logic via Maven (15 tests passed) and verified UI behavior via Playwright (1 test passed). UI correctly reflects changes for creating a material and validates form appropriately."
+}
