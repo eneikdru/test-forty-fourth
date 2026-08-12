@@ -18,6 +18,7 @@ import java.sql.Statement;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class SearchIntegrationTest {
 
@@ -35,6 +36,12 @@ public class SearchIntegrationTest {
         // Construct schema manually to avoid running PostgreSQL-specific GIN index DDL on H2
         try (Statement stmt = dbConn.createStatement()) {
             stmt.execute("DROP TABLE IF EXISTS materials CASCADE");
+            stmt.execute("DROP TABLE IF EXISTS categories CASCADE");
+
+            stmt.execute("CREATE TABLE categories (" +
+                    "id INT AUTO_INCREMENT PRIMARY KEY, " +
+                    "name VARCHAR(255) UNIQUE NOT NULL" +
+                    ")");
 
             stmt.execute("CREATE TABLE materials (" +
                     "id INT AUTO_INCREMENT PRIMARY KEY, " +
@@ -44,7 +51,7 @@ public class SearchIntegrationTest {
                     ")");
 
             // Align with V20260812160946370__add_category_and_status.sql
-            stmt.execute("ALTER TABLE materials ADD COLUMN category VARCHAR(255)");
+            stmt.execute("ALTER TABLE materials ADD COLUMN category_id INT REFERENCES categories(id)");
             stmt.execute("ALTER TABLE materials ADD COLUMN status VARCHAR(50)");
         }
 
@@ -60,33 +67,62 @@ public class SearchIntegrationTest {
     }
 
     private static void populateTestData() throws SQLException {
-        String insertSql = "INSERT INTO materials (title, content, category, status) VALUES (?, ?, ?, ?)";
+        // First insert categories
+        long viralStrainsId;
+        long bacterialCulturesId;
+        long outbreakDataId;
+
+        String insertCategorySql = "INSERT INTO categories (name) VALUES (?)";
+        try (PreparedStatement pstmt = dbConn.prepareStatement(insertCategorySql, Statement.RETURN_GENERATED_KEYS)) {
+            pstmt.setString(1, "Viral Strains");
+            pstmt.executeUpdate();
+            try (var rs = pstmt.getGeneratedKeys()) {
+                rs.next();
+                viralStrainsId = rs.getLong(1);
+            }
+
+            pstmt.setString(1, "Bacterial Cultures");
+            pstmt.executeUpdate();
+            try (var rs = pstmt.getGeneratedKeys()) {
+                rs.next();
+                bacterialCulturesId = rs.getLong(1);
+            }
+
+            pstmt.setString(1, "Outbreak Data");
+            pstmt.executeUpdate();
+            try (var rs = pstmt.getGeneratedKeys()) {
+                rs.next();
+                outbreakDataId = rs.getLong(1);
+            }
+        }
+
+        String insertSql = "INSERT INTO materials (title, content, category_id, status) VALUES (?, ?, ?, ?)";
         try (PreparedStatement pstmt = dbConn.prepareStatement(insertSql)) {
             // Material 1
             pstmt.setString(1, "Influenza A(H1N1) Standard Operating Procedure");
             pstmt.setString(2, "Standard operating procedure for the detection, reporting, and preliminary epidemiological investigation of suspected human cases of novel influenza A.");
-            pstmt.setString(3, "Viral Strains");
+            pstmt.setLong(3, viralStrainsId);
             pstmt.setString(4, "Analyzed");
             pstmt.executeUpdate();
 
             // Material 2
             pstmt.setString(1, "Avian Influenza (H5N1) Field Sampling Guidelines");
             pstmt.setString(2, "Comprehensive field manual for environmental swabbing and live-bird sampling in wet markets.");
-            pstmt.setString(3, "Viral Strains");
+            pstmt.setLong(3, viralStrainsId);
             pstmt.setString(4, "Pending");
             pstmt.executeUpdate();
 
             // Material 3
             pstmt.setString(1, "Bacterial Culture Preservation Guidelines");
             pstmt.setString(2, "Standard laboratory protocol for the safe preservation, freezing, and revitalization of pathogenic bacterial cultures.");
-            pstmt.setString(3, "Bacterial Cultures");
+            pstmt.setLong(3, bacterialCulturesId);
             pstmt.setString(4, "Archived");
             pstmt.executeUpdate();
 
             // Material 4
             pstmt.setString(1, "Urgent Cholera Outbreak Alert");
             pstmt.setString(2, "Critical communication and response protocol for immediate containment of sudden cholera outbreak in urban environments.");
-            pstmt.setString(3, "Outbreak Data");
+            pstmt.setLong(3, outbreakDataId);
             pstmt.setString(4, "Urgent");
             pstmt.executeUpdate();
         }
@@ -103,6 +139,21 @@ public class SearchIntegrationTest {
             }
             dbConn.close();
         }
+    }
+
+    @Test
+    public void testSchemaReferentialIntegrity() {
+        // Assert that inserting a material with a non-existent category_id fails due to foreign key constraint
+        String insertSql = "INSERT INTO materials (title, content, category_id, status) VALUES (?, ?, ?, ?)";
+        assertThrows(SQLException.class, () -> {
+            try (PreparedStatement pstmt = dbConn.prepareStatement(insertSql)) {
+                pstmt.setString(1, "Test Referential Integrity");
+                pstmt.setString(2, "Sample Description");
+                pstmt.setLong(3, 999999L); // Invalid foreign key
+                pstmt.setString(4, "Pending");
+                pstmt.executeUpdate();
+            }
+        });
     }
 
     @Test
