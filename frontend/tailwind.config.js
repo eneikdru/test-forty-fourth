@@ -1,0 +1,93 @@
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{svelte,js,ts,jsx,tsx}",
+  ],
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "primary": "#000000",
+        "on-tertiary-container": "#0c9488",
+        "on-primary": "#ffffff",
+        "on-tertiary-fixed-variant": "#005049",
+        "background": "#f8f9ff",
+        "on-secondary-container": "#fefcff",
+        "error": "#ba1a1a",
+        "secondary-container": "#2170e4",
+        "error-container": "#ffdad6",
+        "primary-container": "#131b2e",
+        "surface-container-lowest": "#ffffff",
+        "tertiary-fixed": "#89f5e7",
+        "outline-variant": "#c6c6cd",
+        "outline": "#76777d",
+        "secondary-fixed-dim": "#adc6ff",
+        "on-error": "#ffffff",
+        "surface-variant": "#d3e4fe",
+        "on-tertiary-fixed": "#00201d",
+        "on-surface": "#0b1c30",
+        "surface-tint": "#565e74",
+        "surface-container-highest": "#d3e4fe",
+        "tertiary-fixed-dim": "#6bd8cb",
+        "on-secondary-fixed-variant": "#004395",
+        "surface-container-low": "#eff4ff",
+        "on-primary-fixed": "#131b2e",
+        "primary-fixed-dim": "#bec6e0",
+        "on-secondary": "#ffffff",
+        "on-tertiary": "#ffffff",
+        "primary-fixed": "#dae2fd",
+        "surface-dim": "#cbdbf5",
+        "surface-container": "#e5eeff",
+        "surface": "#f8f9ff",
+        "inverse-surface": "#213145",
+        "on-secondary-fixed": "#001a42",
+        "inverse-on-surface": "#eaf1ff",
+        "on-primary-fixed-variant": "#3f465c",
+        "surface-container-high": "#dce9ff",
+        "surface-bright": "#f8f9ff",
+        "tertiary": "#000000",
+        "on-error-container": "#93000a",
+        "tertiary-container": "#00201d",
+        "on-primary-container": "#7c839b",
+        "on-background": "#0b1c30",
+        "inverse-primary": "#bec6e0",
+        "secondary": "#0058be",
+        "secondary-fixed": "#d8e2ff",
+        "on-surface-variant": "#45464d"
+      },
+      borderRadius: {
+        "DEFAULT": "0.125rem",
+        "lg": "0.25rem",
+        "xl": "0.5rem",
+        "full": "0.75rem"
+      },
+      spacing: {
+        "base": "4px",
+        "md": "16px",
+        "margin-desktop": "32px",
+        "lg": "24px",
+        "max-width": "1440px",
+        "sm": "8px",
+        "gutter": "16px",
+        "xs": "4px",
+        "margin-mobile": "16px",
+        "xl": "32px"
+      },
+      fontFamily: {
+        "headline-lg-mobile": ["Inter"],
+        "headline-md": ["Inter"],
+        "display-lg": ["Inter"],
+        "code-md": ["monospace"],
+        "body-sm": ["Inter"],
+        "body-lg": ["Inter"],
+        "headline-lg": ["Inter"],
+        "label-md": ["Inter"],
+        "body-md": ["Inter"]
+      }
+    },
+  },
+  plugins: [
+    import("@tailwindcss/forms")
+  ],
+}
