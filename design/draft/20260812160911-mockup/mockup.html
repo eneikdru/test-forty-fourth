@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EpiTrack - Material Catalog</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#000000",
+                        "on-tertiary-container": "#0c9488",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#005049",
+                        "background": "#f8f9ff",
+                        "on-secondary-container": "#fefcff",
+                        "error": "#ba1a1a",
+                        "secondary-container": "#2170e4",
+                        "error-container": "#ffdad6",
+                        "primary-container": "#131b2e",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed": "#89f5e7",
+                        "outline-variant": "#c6c6cd",
+                        "outline": "#76777d",
+                        "secondary-fixed-dim": "#adc6ff",
+                        "on-error": "#ffffff",
+                        "surface-variant": "#d3e4fe",
+                        "on-tertiary-fixed": "#00201d",
+                        "on-surface": "#0b1c30",
+                        "surface-tint": "#565e74",
+                        "surface-container-highest": "#d3e4fe",
+                        "tertiary-fixed-dim": "#6bd8cb",
+                        "on-secondary-fixed-variant": "#004395",
+                        "surface-container-low": "#eff4ff",
+                        "on-primary-fixed": "#131b2e",
+                        "primary-fixed-dim": "#bec6e0",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "primary-fixed": "#dae2fd",
+                        "surface-dim": "#cbdbf5",
+                        "surface-container": "#e5eeff",
+                        "surface": "#f8f9ff",
+                        "inverse-surface": "#213145",
+                        "on-secondary-fixed": "#001a42",
+                        "inverse-on-surface": "#eaf1ff",
+                        "on-primary-fixed-variant": "#3f465c",
+                        "surface-container-high": "#dce9ff",
+                        "surface-bright": "#f8f9ff",
+                        "tertiary": "#000000",
+                        "on-error-container": "#93000a",
+                        "tertiary-container": "#00201d",
+                        "on-primary-container": "#7c839b",
+                        "on-background": "#0b1c30",
+                        "inverse-primary": "#bec6e0",
+                        "secondary": "#0058be",
+                        "secondary-fixed": "#d8e2ff",
+                        "on-surface-variant": "#45464d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "base": "4px",
+                        "md": "16px",
+                        "margin-desktop": "32px",
+                        "lg": "24px",
+                        "max-width": "1440px",
+                        "sm": "8px",
+                        "gutter": "16px",
+                        "xs": "4px",
+                        "margin-mobile": "16px",
+                        "xl": "32px"
+                    },
+                    "fontFamily": {
+                        "headline-lg-mobile": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "code-md": ["monospace"],
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-lg-mobile": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-md": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+                        "display-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "code-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "body-sm": ["13px", { "lineHeight": "18px", "fontWeight": "400" }],
+                        "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.01em", "fontWeight": "600" }],
+                        "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-md": ["14px", { "lineHeight": "20px", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #f8f9ff;
+            color: #0b1c30;
+        }
+        .fluid-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            padding: 16px;
+        }
+        @media (min-width: 768px) {
+            .fluid-grid {
+                grid-template-columns: repeat(8, 1fr);
+            }
+        }
+        @media (min-width: 1024px) {
+            .fluid-grid {
+                grid-template-columns: repeat(12, 1fr);
+                padding: 32px;
+            }
+        }
+        
+        .status-badge-analyzed {
+            background-color: #e0f2f1; /* Light Teal roughly */
+            color: #000000; /* Tertiary text */
+        }
+        .status-badge-pending {
+            background-color: #f1f5f9; /* Light Grey */
+            color: #475569; /* Neutral */
+        }
+        .status-badge-archived {
+            background-color: #64748b; /* Slate */
+            color: #ffffff;
+        }
+        .status-badge-urgent {
+            background-color: #fee2e2;
+            color: #ba1a1a;
+        }
+
+        .data-table-row {
+            border-bottom: 1px solid #E2E8F0;
+            transition: background-color 0.2s ease;
+        }
+        .data-table-row:hover {
+            background-color: #EFF6FF;
+        }
+        
+        /* Nav hiding logic */
+        .desktop-nav { display: none; }
+        @media (min-width: 768px) {
+            .desktop-nav { display: flex; }
+            .mobile-nav { display: none !important; }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background min-h-screen flex flex-col font-body-md text-on-surface">
+<!-- TopAppBar -->
+<header class="w-full top-0 sticky bg-surface dark:bg-surface-container-high border-b border-outline-variant dark:border-outline flex justify-between items-center px-margin-mobile py-sm z-40">
+<div class="flex items-center gap-4">
+<h1 class="font-headline-md text-headline-md font-bold text-primary dark:text-primary-fixed">EpiTrack</h1>
+</div>
+<!-- Desktop Nav Items -->
+<nav class="desktop-nav gap-6 items-center flex-1 ml-12">
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-colors px-4 py-2 rounded-lg cursor-pointer active:opacity-70" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 0;">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed hover:bg-surface-variant/50 transition-colors px-4 py-2 rounded-lg cursor-pointer active:opacity-70 border-l-4 border-on-tertiary-container pl-3 ml-1 bg-surface-variant/30" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+<span class="font-label-md text-label-md">Catalog</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-colors px-4 py-2 rounded-lg cursor-pointer active:opacity-70" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 0;">add_box</span>
+<span class="font-label-md text-label-md">Add New</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-colors px-4 py-2 rounded-lg cursor-pointer active:opacity-70" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 0;">history</span>
+<span class="font-label-md text-label-md">History</span>
+</a>
+</nav>
+<div class="flex items-center gap-4">
+<button class="text-primary dark:text-primary-fixed hover:bg-surface-variant/50 transition-colors p-2 rounded-full cursor-pointer active:opacity-70 flex items-center justify-center">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-variant overflow-hidden cursor-pointer flex-shrink-0">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A small, professional avatar portrait of a medical researcher wearing a white lab coat, clean modern lighting, professional headshot style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAZHkCtIGLXX1WpY0zxkChj-PQ73w8ebTDUVqJxixoLdGzbYC2UhSekIdqcbLhpKBUPjSlJGsTf-fkpbMgFhNBdKazh_jxYOUPcIo8N4En3ewCMHPycxyvB_5qPP79yp4Idm-pqvlu-7Px4g8y_wYm-NdRL7hLXps9dBMlaRGuUgXYs5NgeztmXxS5mQFaxG9NARJLEW-I4KkA7x9zAVJyGTdfPWNMTOaNFERX-3k3fW07lOV2gjZNaapO0qxi73GYt-CQbOIyy6Fls"/>
+</div>
+</div>
+</header>
+<!-- Main Content Stage -->
+<main class="flex-1 w-full max-w-[1440px] mx-auto flex flex-col md:flex-row pb-24 md:pb-8">
+<!-- Optional Secondary Sidebar (Filters) for Desktop -->
+<aside class="hidden md:block w-[280px] p-margin-desktop border-r border-outline-variant flex-shrink-0 min-h-[calc(100vh-64px)]">
+<h2 class="font-headline-md text-headline-md mb-6">Filters</h2>
+<div class="mb-6">
+<label class="block font-body-sm text-body-sm font-bold text-on-surface mb-2">Category</label>
+<div class="flex flex-col gap-2">
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="rounded border-outline text-secondary focus:ring-secondary" type="checkbox"/>
+<span class="font-body-md text-body-md">Viral Strains</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="rounded border-outline text-secondary focus:ring-secondary" type="checkbox"/>
+<span class="font-body-md text-body-md">Bacterial Cultures</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="rounded border-outline text-secondary focus:ring-secondary" type="checkbox"/>
+<span class="font-body-md text-body-md">Antibodies</span>
+</label>
+</div>
+</div>
+<div class="mb-6">
+<label class="block font-body-sm text-body-sm font-bold text-on-surface mb-2">Status</label>
+<div class="flex flex-col gap-2">
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="rounded border-outline text-secondary focus:ring-secondary" type="checkbox"/>
+<span class="font-body-md text-body-md">Analyzed</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="rounded border-outline text-secondary focus:ring-secondary" type="checkbox"/>
+<span class="font-body-md text-body-md">Pending</span>
+</label>
+<label class="flex items-center gap-2 cursor-pointer">
+<input class="rounded border-outline text-secondary focus:ring-secondary" type="checkbox"/>
+<span class="font-body-md text-body-md">Archived</span>
+</label>
+</div>
+</div>
+</aside>
+<!-- Data Stage -->
+<div class="flex-1 p-margin-mobile md:p-margin-desktop flex flex-col gap-xl">
+<!-- Top Controls (Search & Chips) -->
+<div class="flex flex-col lg:flex-row gap-4 items-start lg:items-center justify-between bg-surface-container-lowest p-4 rounded-xl border border-[#E2E8F0] shadow-sm">
+<div class="relative w-full lg:w-96">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-lowest border border-[#CBD5E1] rounded-lg font-body-md text-body-md focus:outline-none focus:border-secondary focus:ring-0 focus:ring-offset-0 transition-colors" placeholder="Search Material ID or Name..." type="text"/>
+</div>
+<!-- Mobile Filter Chips (Horizontal Scroll) -->
+<div class="flex md:hidden gap-2 overflow-x-auto w-full pb-2 snap-x">
+<button class="snap-start flex-shrink-0 px-3 py-1.5 rounded-full border border-outline-variant bg-surface-container-lowest font-label-md text-label-md text-on-surface-variant whitespace-nowrap flex items-center gap-1 hover:bg-surface-variant transition-colors">
+                        Category: All <span class="material-symbols-outlined text-[16px]">arrow_drop_down</span>
+</button>
+<button class="snap-start flex-shrink-0 px-3 py-1.5 rounded-full border border-outline-variant bg-surface-container-lowest font-label-md text-label-md text-on-surface-variant whitespace-nowrap flex items-center gap-1 hover:bg-surface-variant transition-colors">
+                        Status: Active <span class="material-symbols-outlined text-[16px]">arrow_drop_down</span>
+</button>
+<button class="snap-start flex-shrink-0 px-3 py-1.5 rounded-full border border-outline-variant bg-surface-container-lowest font-label-md text-label-md text-on-surface-variant whitespace-nowrap flex items-center gap-1 hover:bg-surface-variant transition-colors">
+                        Date: Last 30 Days <span class="material-symbols-outlined text-[16px]">arrow_drop_down</span>
+</button>
+</div>
+</div>
+<!-- Complex Data Table -->
+<div class="bg-surface-container-lowest rounded-xl border border-[#E2E8F0] overflow-hidden shadow-sm flex-1">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse min-w-[600px]">
+<thead>
+<tr class="bg-surface-container-low border-b border-[#E2E8F0]">
+<th class="font-label-md text-label-md text-on-surface px-4 py-3 sticky left-0 bg-surface-container-low">Material ID</th>
+<th class="font-label-md text-label-md text-on-surface px-4 py-3">Name</th>
+<th class="font-label-md text-label-md text-on-surface px-4 py-3">Category</th>
+<th class="font-label-md text-label-md text-on-surface px-4 py-3">Date Added</th>
+<th class="font-label-md text-label-md text-on-surface px-4 py-3">Status</th>
+<th class="font-label-md text-label-md text-on-surface px-4 py-3 text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="font-body-md text-body-md">
+<tr class="data-table-row">
+<td class="px-4 py-2 font-code-md text-code-md text-secondary sticky left-0 bg-inherit">EP-2023-A01</td>
+<td class="px-4 py-2 font-medium">SARS-CoV-2 Batch A</td>
+<td class="px-4 py-2 text-on-surface-variant">Viral Strains</td>
+<td class="px-4 py-2 text-on-surface-variant">Oct 12, 2023</td>
+<td class="px-4 py-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full font-label-md text-label-md status-badge-analyzed">Analyzed</span>
+</td>
+<td class="px-4 py-2 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-1"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</td>
+</tr>
+<tr class="data-table-row">
+<td class="px-4 py-2 font-code-md text-code-md text-secondary sticky left-0 bg-inherit">EP-2023-A02</td>
+<td class="px-4 py-2 font-medium">Influenza A H1N1 Ref</td>
+<td class="px-4 py-2 text-on-surface-variant">Viral Strains</td>
+<td class="px-4 py-2 text-on-surface-variant">Oct 14, 2023</td>
+<td class="px-4 py-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full font-label-md text-label-md status-badge-pending">Pending</span>
+</td>
+<td class="px-4 py-2 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-1"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</td>
+</tr>
+<tr class="data-table-row">
+<td class="px-4 py-2 font-code-md text-code-md text-secondary sticky left-0 bg-inherit">EP-2023-B01</td>
+<td class="px-4 py-2 font-medium">E. Coli Strain K12</td>
+<td class="px-4 py-2 text-on-surface-variant">Bacterial Cultures</td>
+<td class="px-4 py-2 text-on-surface-variant">Sep 28, 2023</td>
+<td class="px-4 py-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full font-label-md text-label-md status-badge-archived">Archived</span>
+</td>
+<td class="px-4 py-2 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-1"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</td>
+</tr>
+<tr class="data-table-row">
+<td class="px-4 py-2 font-code-md text-code-md text-secondary sticky left-0 bg-inherit">EP-2023-A03</td>
+<td class="px-4 py-2 font-medium">Unknown Isolate 44X</td>
+<td class="px-4 py-2 text-on-surface-variant">Viral Strains</td>
+<td class="px-4 py-2 text-on-surface-variant">Oct 20, 2023</td>
+<td class="px-4 py-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full font-label-md text-label-md status-badge-urgent">Urgent</span>
+</td>
+<td class="px-4 py-2 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-1"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</td>
+</tr>
+<tr class="data-table-row">
+<td class="px-4 py-2 font-code-md text-code-md text-secondary sticky left-0 bg-inherit">EP-2023-C01</td>
+<td class="px-4 py-2 font-medium">Mab-IgG-12</td>
+<td class="px-4 py-2 text-on-surface-variant">Antibodies</td>
+<td class="px-4 py-2 text-on-surface-variant">Oct 05, 2023</td>
+<td class="px-4 py-2">
+<span class="inline-flex items-center px-2 py-0.5 rounded-full font-label-md text-label-md status-badge-analyzed">Analyzed</span>
+</td>
+<td class="px-4 py-2 text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-1"><span class="material-symbols-outlined text-[20px]">more_vert</span></button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="px-4 py-3 border-t border-[#E2E8F0] flex items-center justify-between bg-surface-container-lowest">
+<span class="font-body-sm text-body-sm text-on-surface-variant">Showing 1 to 5 of 42 entries</span>
+<div class="flex gap-2">
+<button class="p-1 rounded hover:bg-surface-variant text-on-surface-variant transition-colors disabled:opacity-50"><span class="material-symbols-outlined">chevron_left</span></button>
+<button class="p-1 rounded hover:bg-surface-variant text-on-surface-variant transition-colors"><span class="material-symbols-outlined">chevron_right</span></button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="mobile-nav fixed bottom-0 w-full z-50 bg-surface dark:bg-surface-container-high flex justify-around items-center h-16 px-2 border-t border-outline-variant dark:border-outline md:hidden shadow-[0_-4px_12px_rgba(0,0,0,0.05)]">
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-surface-variant transition-all scale-95 active:scale-90 w-1/4" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">dashboard</span>
+<span class="font-label-md text-label-md mt-1">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-secondary-container dark:bg-secondary text-on-secondary-container dark:text-on-secondary rounded-full px-4 py-1 hover:bg-surface-variant transition-all scale-95 active:scale-90 w-1/4" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+<span class="font-label-md text-label-md mt-1">Catalog</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-surface-variant transition-all scale-95 active:scale-90 w-1/4" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">add_box</span>
+<span class="font-label-md text-label-md mt-1">Add New</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-surface-variant dark:text-on-surface-variant px-4 py-1 hover:bg-surface-variant transition-all scale-95 active:scale-90 w-1/4" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">history</span>
+<span class="font-label-md text-label-md mt-1">History</span>
+</a>
+</nav>
+</body></html>
