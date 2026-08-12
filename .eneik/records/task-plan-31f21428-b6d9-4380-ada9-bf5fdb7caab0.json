@@ -1,0 +1,188 @@
+{
+  "epics": [
+    {
+      "existingEpicId": null,
+      "title": "Epidemiological Material Cataloging and Management",
+      "jtbd": "When I manage the epidemiology knowledge base, I want to catalog and update materials, so that the information is structured and up to date.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "Reduce average time to publish a new material from hours to under 5 minutes",
+      "tocConstraintRef": "Material data entry bottleneck",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Create, read, update, and delete epidemiological materials, protocols, and data.",
+        "R2: Categorize and organize the materials within the system taxonomy."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Schema design for epidemiological materials",
+          "roleTag": "BARCAN-TAG-08",
+          "jtbd": "When implementing the storage layer for this epic, I want a robust schema for epidemiological materials, so that the cataloging operations can persist structured data reliably.",
+          "acceptanceCriteria": "Given an empty database, When the schema migration runs, Then tables for materials and categories are created successfully.\nGiven a valid material record, When inserted into the database, Then all fields and relations are persisted correctly.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Storage schema initialization",
+          "sixSigmaMetric": "Zero schema mismatch errors on material creation",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        },
+        {
+          "title": "API contract for material management",
+          "roleTag": "BARCAN-TAG-12",
+          "jtbd": "When defining the communication boundary for this epic, I want an API contract for material CRUD operations, so that backend and frontend developers can implement the cataloging functionality in parallel.",
+          "acceptanceCriteria": "Given the OpenAPI specification, When it is validated, Then no syntax or structural errors are found.\nGiven a mock client, When a request is sent based on the contract, Then it successfully matches the defined schema.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Frontend-Backend coordination delay",
+          "sixSigmaMetric": "Zero breaking API contract changes during parallel development",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        },
+        {
+          "title": "Backend material management API",
+          "roleTag": "BARCAN-TAG-02",
+          "jtbd": "When building the backend for this epic, I want API endpoints for managing materials, so that the system handles business logic and persists catalog changes.",
+          "acceptanceCriteria": "Given an authenticated user, When they send a POST request with valid material data, Then the backend persists the data and returns 201 Created.\nGiven an invalid material payload, When the creation endpoint is called, Then the backend returns a 400 Bad Request with validation details.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "API endpoint availability",
+          "sixSigmaMetric": "100% of successful material creations return under 200ms",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        },
+        {
+          "title": "Material management UI",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When building the user interface for this epic, I want forms and lists for epidemiological materials, so that users can visually catalog and manage the data.",
+          "acceptanceCriteria": "Given the catalog dashboard, When a user clicks the create button, Then a material entry form is displayed.\nGiven a completed form, When the user submits it, Then the material is saved and appears in the updated list.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "User data entry friction",
+          "sixSigmaMetric": "Time to complete material entry form < 2 minutes on average",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        },
+        {
+          "title": "End-to-end testing for material management",
+          "roleTag": "BARCAN-TAG-06",
+          "jtbd": "When verifying the implementation for this epic, I want end-to-end and integration tests for material management, so that the cataloging functionality is proven to be bug-free.",
+          "acceptanceCriteria": "Given the automated test suite, When the unit tests for material logic are executed, Then all tests pass without errors.\nGiven the end-to-end framework, When a test script creates and updates a material, Then the UI correctly reflects all changes.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Manual regression testing bottleneck",
+          "sixSigmaMetric": "Zero escaped regressions in material CRUD operations",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "Epidemiological Material Search",
+      "jtbd": "When I am researching epidemiological protocols, I want to search and filter the database, so that I can quickly find the exact materials I need.",
+      "kanoClass": "Performance",
+      "cynefinDomain": "complicated",
+      "sixSigmaMetric": "Reduce material retrieval time from manual browsing to under 2 seconds",
+      "tocConstraintRef": "Information discovery bottleneck",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Perform full-text queries across the epidemiological materials.",
+        "R2: Apply filters to search results based on material types or categories."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Search indexing and query optimization",
+          "roleTag": "BARCAN-TAG-08",
+          "jtbd": "When preparing data retrieval for this epic, I want to configure full-text indexes and optimized queries, so that material searches perform well.",
+          "acceptanceCriteria": "Given the materials table, When the search migration runs, Then full-text indexes are successfully applied to title and content fields.\nGiven a large dataset, When a search query is executed, Then the database uses the index to return results efficiently.",
+          "leanValue": "essential",
+          "cynefinDomain": "complicated",
+          "tocConstraintRef": "Database query latency",
+          "sixSigmaMetric": "99th percentile search query latency < 100ms",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        },
+        {
+          "title": "API contract for search and filtering",
+          "roleTag": "BARCAN-TAG-12",
+          "jtbd": "When defining the communication boundary for this epic, I want a shared contract for search endpoints, so that the search features can be developed independently on the client and server.",
+          "acceptanceCriteria": "Given the search API definition, When it is reviewed, Then it explicitly defines query string and filter parameters.\nGiven the shared contract, When backend and frontend teams validate it, Then both agree on the expected search response format.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Integration mismatch risk",
+          "sixSigmaMetric": "Zero integration bugs caused by uncommunicated search parameter changes",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        },
+        {
+          "title": "Search and filter API endpoints",
+          "roleTag": "BARCAN-TAG-02",
+          "jtbd": "When building the backend for this epic, I want to implement the search and filtering logic, so that client requests return accurate knowledge base matches.",
+          "acceptanceCriteria": "Given a valid search keyword, When the search endpoint is called, Then the backend returns a list of materials matching the keyword.\nGiven a category filter, When applied to the search request, Then the backend restricts the results to the specified category.",
+          "leanValue": "essential",
+          "cynefinDomain": "complicated",
+          "tocConstraintRef": "Search API throughput",
+          "sixSigmaMetric": "Zero 500 errors during complex search filter combinations",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        },
+        {
+          "title": "Search interface and results display",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When building the user interface for this epic, I want a search bar and results view, so that users can interactively find epidemiological protocols.",
+          "acceptanceCriteria": "Given the search page, When a user enters text into the search bar, Then the UI requests and displays matching results.\nGiven a list of search results, When a user clicks on a specific material, Then they are navigated to the material's detail view.",
+          "leanValue": "essential",
+          "cynefinDomain": "complicated",
+          "tocConstraintRef": "User search interaction friction",
+          "sixSigmaMetric": "Click-through rate on top 3 search results > 80%",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        },
+        {
+          "title": "End-to-end testing for search flows",
+          "roleTag": "BARCAN-TAG-06",
+          "jtbd": "When verifying the search features for this epic, I want to test index querying and UI filtering, so that the search results are demonstrably accurate and reliable.",
+          "acceptanceCriteria": "Given the test environment, When a search for a known material is performed, Then the result exactly matches the expected item.\nGiven a complex combination of filters, When applied in a UI test, Then the displayed results strictly adhere to all active filters.",
+          "leanValue": "essential",
+          "cynefinDomain": "complicated",
+          "tocConstraintRef": "Search relevance regression risk",
+          "sixSigmaMetric": "100% test coverage for critical search permutations",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    }
+  ]
+}
