@@ -1,7 +1,12 @@
 <script>
+  import SearchPage from "./SearchPage.svelte";
+  import MaterialDetail from "./MaterialDetail.svelte";
+
   // Svelte 5 state runes
   let materials = $state(loadMaterials());
   let searchQuery = $state("");
+  let searchPageActive = $state(false);
+  let selectedDetailedMaterial = $state(null);
   let selectedCategories = $state([]);
   let selectedStatuses = $state([]);
   let isFormVisible = $state(false);
@@ -200,15 +205,24 @@
       </button>
       <button
         class="flex flex-col items-center justify-center text-primary hover:bg-surface-variant/50 transition-colors px-4 py-2 rounded-lg cursor-pointer active:opacity-70 border-l-4 border-on-tertiary-container pl-3 ml-1 bg-surface-variant/30"
-        onclick={() => { isFormVisible = false; }}
+        onclick={() => { isFormVisible = false; searchPageActive = false; selectedDetailedMaterial = null; }}
         aria-label="Navigate to Catalog"
       >
-        <span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+        <span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' {!searchPageActive && !isFormVisible ? 1 : 0};">inventory_2</span>
         <span class="font-label-md text-label-md">Catalog</span>
       </button>
       <button
+        class="flex flex-col items-center justify-center hover:bg-surface-variant/50 transition-colors px-4 py-2 rounded-lg cursor-pointer active:opacity-70 {searchPageActive ? 'text-primary bg-surface-variant/30' : 'text-on-surface-variant'}"
+        onclick={() => { searchPageActive = true; selectedDetailedMaterial = null; isFormVisible = false; }}
+        aria-label="Navigate to Search Protocols"
+        id="nav-search-protocols"
+      >
+        <span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' {searchPageActive ? 1 : 0};">search</span>
+        <span class="font-label-md text-label-md">Search</span>
+      </button>
+      <button
         class="flex flex-col items-center justify-center text-on-surface-variant hover:bg-surface-variant/50 transition-colors px-4 py-2 rounded-lg cursor-pointer active:opacity-70"
-        onclick={openCreateForm}
+        onclick={() => { openCreateForm(); searchPageActive = false; selectedDetailedMaterial = null; }}
         aria-label="Add New Material Form"
       >
         <span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 0;">add_box</span>
@@ -241,11 +255,27 @@
   {/if}
 
   <!-- Main Content Stage -->
-  <main class="flex-1 w-full max-w-[1440px] mx-auto flex flex-col md:flex-row pb-24 md:pb-8">
+  {#if selectedDetailedMaterial}
+    <div class="flex-1 w-full flex flex-col md:flex-row">
+      <MaterialDetail
+        selectedMaterial={selectedDetailedMaterial}
+        onBack={() => { selectedDetailedMaterial = null; }}
+      />
+    </div>
+  {:else if searchPageActive}
+    <div class="flex-1 w-full flex flex-col md:flex-row">
+      <SearchPage
+        onSelectMaterial={(material) => { selectedDetailedMaterial = material; }}
+        onNavigateToCatalog={() => { searchPageActive = false; isFormVisible = false; selectedDetailedMaterial = null; }}
+        onNavigateToCreate={() => { searchPageActive = false; isFormVisible = true; openCreateForm(); selectedDetailedMaterial = null; }}
+      />
+    </div>
+  {:else}
+    <main class="flex-1 w-full max-w-[1440px] mx-auto flex flex-col md:flex-row pb-24 md:pb-8">
 
-    {#if !isFormVisible}
-      <!-- Optional Secondary Sidebar (Filters) for Desktop -->
-      <aside class="hidden md:block w-[280px] p-margin-desktop border-r border-outline-variant flex-shrink-0 min-h-[calc(100vh-64px)]">
+      {#if !isFormVisible}
+        <!-- Optional Secondary Sidebar (Filters) for Desktop -->
+        <aside class="hidden md:block w-[280px] p-margin-desktop border-r border-outline-variant flex-shrink-0 min-h-[calc(100vh-64px)]">
         <h2 class="font-headline-md text-headline-md mb-6">Filters</h2>
         <div class="mb-6">
           <span class="block font-body-sm text-body-sm font-bold text-on-surface mb-2">Category</span>
@@ -350,10 +380,13 @@
                   </tr>
                 {:else}
                   {#each filteredMaterials as item}
-                    <tr class="data-table-row border-b border-[#E2E8F0] hover:bg-[#EFF6FF] transition-colors">
+                    <tr
+                      onclick={() => { selectedDetailedMaterial = item; }}
+                      class="data-table-row border-b border-[#E2E8F0] hover:bg-[#EFF6FF] transition-colors cursor-pointer"
+                    >
                       <td class="px-4 py-3 font-code-md text-code-md text-secondary sticky left-0 bg-inherit">{item.id}</td>
                       <td class="px-4 py-3 font-medium">
-                        <div class="font-bold text-on-surface">{item.title}</div>
+                        <div class="font-bold text-on-surface hover:text-secondary transition-colors">{item.title}</div>
                         <div class="text-xs text-on-surface-variant line-clamp-1">{item.content}</div>
                       </td>
                       <td class="px-4 py-3 text-on-surface-variant">{item.category}</td>
@@ -513,25 +546,37 @@
       </div>
     {/if}
 
-  </main>
+    </main>
+  {/if}
 
   <!-- BottomNavBar (Mobile Only) -->
   <nav class="mobile-nav fixed bottom-0 w-full z-50 bg-surface-container-lowest flex justify-around items-center h-16 px-2 border-t border-outline-variant md:hidden shadow-[0_-4px_12px_rgba(0,0,0,0.05)]">
     <button
       class="flex flex-col items-center justify-center px-4 py-1 hover:bg-surface-variant transition-all scale-95 active:scale-90 w-1/4"
-      class:text-secondary={!isFormVisible}
-      class:text-on-surface-variant={isFormVisible}
-      onclick={() => { isFormVisible = false; searchQuery = ''; selectedCategories = []; selectedStatuses = []; }}
+      class:text-secondary={!searchPageActive && !isFormVisible}
+      class:text-on-surface-variant={searchPageActive || isFormVisible}
+      onclick={() => { isFormVisible = false; searchPageActive = false; selectedDetailedMaterial = null; searchQuery = ''; selectedCategories = []; selectedStatuses = []; }}
       aria-label="Mobile Catalog Dashboard"
     >
-      <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' {!isFormVisible ? 1 : 0};">inventory_2</span>
+      <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' {!searchPageActive && !isFormVisible ? 1 : 0};">inventory_2</span>
       <span class="font-label-md text-label-md mt-1">Catalog</span>
+    </button>
+    <button
+      class="flex flex-col items-center justify-center px-4 py-1 hover:bg-surface-variant transition-all scale-95 active:scale-90 w-1/4"
+      class:text-secondary={searchPageActive}
+      class:text-on-surface-variant={!searchPageActive}
+      onclick={() => { searchPageActive = true; selectedDetailedMaterial = null; isFormVisible = false; }}
+      aria-label="Mobile Search page"
+      id="mobile-nav-search-protocols"
+    >
+      <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' {searchPageActive ? 1 : 0};">search</span>
+      <span class="font-label-md text-label-md mt-1">Search</span>
     </button>
     <button
       class="flex flex-col items-center justify-center px-4 py-1 hover:bg-surface-variant transition-all scale-95 active:scale-90 w-1/4"
       class:text-secondary={isFormVisible}
       class:text-on-surface-variant={!isFormVisible}
-      onclick={openCreateForm}
+      onclick={() => { openCreateForm(); searchPageActive = false; selectedDetailedMaterial = null; }}
       aria-label="Mobile Add New Form"
       id="mobile-nav-add-new"
     >

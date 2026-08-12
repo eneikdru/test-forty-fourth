@@ -1,0 +1,5 @@
+/app/src/test/java/com/eneik/production/FullTextSearchTest.java
+/app/src/test/java/com/eneik/production/MaterialsApiContractTest.java
+/app/src/test/java/com/eneik/production/MaterialsIntegrationTest.java
+/app/src/test/java/com/eneik/production/SearchApiContractTest.java
+/app/src/test/java/com/eneik/production/SearchIntegrationTest.java
