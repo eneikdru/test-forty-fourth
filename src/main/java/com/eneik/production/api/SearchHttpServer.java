@@ -3,13 +3,19 @@ package com.eneik.production.api;
 import com.eneik.production.dto.ErrorResponse;
 import com.eneik.production.dto.MaterialDTO;
 import com.eneik.production.dto.SearchResponse;
+import com.eneik.production.dto.JsonParser;
 import com.eneik.production.services.SearchService;
+import com.eneik.production.services.MaterialsService;
+import com.eneik.production.services.ValidationException;
+import com.eneik.production.services.NotFoundException;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.io.InputStream;
+import java.io.ByteArrayOutputStream;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
@@ -21,6 +27,7 @@ public class SearchHttpServer {
 
     private final HttpServer server;
     private final SearchService searchService;
+    private final MaterialsService materialsService;
     private final ConnectionSupplier connectionSupplier;
 
     public interface ConnectionSupplier {
@@ -29,9 +36,11 @@ public class SearchHttpServer {
 
     public SearchHttpServer(int port, ConnectionSupplier connectionSupplier) throws IOException {
         this.searchService = new SearchService();
+        this.materialsService = new MaterialsService();
         this.connectionSupplier = connectionSupplier;
         this.server = HttpServer.create(new InetSocketAddress(port), 0);
         this.server.createContext("/api/materials/search", new SearchHandler());
+        this.server.createContext("/api/materials", new MaterialsHandler());
     }
 
     public void start() {
@@ -107,6 +116,105 @@ public class SearchHttpServer {
                 e.printStackTrace();
                 sendError(exchange, 500, "INTERNAL_SERVER_ERROR", "An internal error occurred: " + e.getMessage());
             }
+        }
+    }
+
+    private class MaterialsHandler implements HttpHandler {
+        @Override
+        public void handle(HttpExchange exchange) throws IOException {
+            String path = exchange.getRequestURI().getPath();
+            String method = exchange.getRequestMethod();
+
+            // Match exact path /api/materials or subpath /api/materials/{id}
+            String subPath = path.substring("/api/materials".length());
+            if (subPath.startsWith("/")) {
+                subPath = subPath.substring(1);
+            }
+
+            try (Connection conn = connectionSupplier.getConnection()) {
+                if (subPath.isEmpty()) {
+                    // /api/materials endpoint
+                    if ("POST".equalsIgnoreCase(method)) {
+                        handleCreate(exchange, conn);
+                    } else {
+                        sendError(exchange, 405, "METHOD_NOT_ALLOWED", "Method " + method + " not supported on /api/materials");
+                    }
+                } else {
+                    // /api/materials/{id} endpoint
+                    Long id;
+                    try {
+                        id = Long.parseLong(subPath);
+                    } catch (NumberFormatException e) {
+                        sendError(exchange, 400, "BAD_REQUEST", "Invalid material ID format");
+                        return;
+                    }
+
+                    if ("GET".equalsIgnoreCase(method)) {
+                        handleGet(exchange, conn, id);
+                    } else if ("PUT".equalsIgnoreCase(method)) {
+                        handleUpdate(exchange, conn, id);
+                    } else if ("DELETE".equalsIgnoreCase(method)) {
+                        handleDelete(exchange, conn, id);
+                    } else {
+                        sendError(exchange, 405, "METHOD_NOT_ALLOWED", "Method " + method + " not supported on /api/materials/{id}");
+                    }
+                }
+            } catch (ValidationException e) {
+                sendError(exchange, 400, "BAD_REQUEST", e.getMessage());
+            } catch (NotFoundException e) {
+                sendError(exchange, 404, "NOT_FOUND", e.getMessage());
+            } catch (Exception e) {
+                e.printStackTrace();
+                sendError(exchange, 500, "INTERNAL_SERVER_ERROR", "An internal error occurred: " + e.getMessage());
+            }
+        }
+
+        private void handleCreate(HttpExchange exchange, Connection conn) throws IOException, SQLException {
+            String body = readRequestBody(exchange);
+            Map<String, String> payload = JsonParser.parse(body);
+
+            String title = payload.get("title");
+            String content = payload.get("content");
+            String category = payload.get("category");
+            String status = payload.get("status");
+
+            MaterialDTO m = materialsService.createMaterial(conn, title, content, category, status);
+            sendResponse(exchange, 201, toJson(m));
+        }
+
+        private void handleGet(HttpExchange exchange, Connection conn, Long id) throws IOException, SQLException {
+            MaterialDTO m = materialsService.getMaterial(conn, id);
+            sendResponse(exchange, 200, toJson(m));
+        }
+
+        private void handleUpdate(HttpExchange exchange, Connection conn, Long id) throws IOException, SQLException {
+            String body = readRequestBody(exchange);
+            Map<String, String> payload = JsonParser.parse(body);
+
+            String title = payload.get("title");
+            String content = payload.get("content");
+            String category = payload.get("category");
+            String status = payload.get("status");
+
+            MaterialDTO m = materialsService.updateMaterial(conn, id, title, content, category, status);
+            sendResponse(exchange, 200, toJson(m));
+        }
+
+        private void handleDelete(HttpExchange exchange, Connection conn, Long id) throws IOException, SQLException {
+            materialsService.deleteMaterial(conn, id);
+            exchange.sendResponseHeaders(204, -1);
+            exchange.close();
+        }
+
+        private String readRequestBody(HttpExchange exchange) throws IOException {
+            InputStream is = exchange.getRequestBody();
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            byte[] buffer = new byte[1024];
+            int len;
+            while ((len = is.read(buffer)) != -1) {
+                bos.write(buffer, 0, len);
+            }
+            return bos.toString(StandardCharsets.UTF_8);
         }
     }
 
