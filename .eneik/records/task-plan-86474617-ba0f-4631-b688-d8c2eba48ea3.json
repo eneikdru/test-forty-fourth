@@ -1,0 +1,94 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "reduce full stack local startup time from >5 mins to <1 min",
+      "tocConstraintRef": "developer environment setup time",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add a docker-compose.yml file at the repository root that starts the full stack and exposes a health-check endpoint."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add docker-compose.yml for full stack local deployment",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing the containerization setup for this epic, I want to configure a docker-compose.yml file, so that the entire product stack can be started with a single command.",
+          "acceptanceCriteria": "Given a repository without a docker-compose.yml\nWhen a developer runs `docker-compose up`\nThen the backend and frontend services start successfully and a health-check endpoint is accessible on the host machine.\nGiven a running stack started via docker-compose\nWhen a developer curls the health-check endpoint\nThen the system responds with an HTTP 200 indicating all services are healthy.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "local observability setup friction",
+          "sixSigmaMetric": "reduce manual service startup commands from >3 to 1",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "reduce time to update or remove an outdated material from >5 mins to <1 min",
+      "tocConstraintRef": "material lifecycle management throughput",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Implement frontend UI capabilities to invoke existing update and delete APIs for epidemiological materials."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add update and delete material capabilities to frontend UI",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing material management UI for this epic, I want to add edit and delete actions, so that users can maintain the catalog directly from the interface.",
+          "acceptanceCriteria": "Given an existing material in the system\nWhen a user clicks the edit button and saves changes\nThen the frontend calls the correct existing API endpoint and updates the displayed catalog list.\nGiven an existing material in the system\nWhen a user clicks the delete button and confirms the action\nThen the material is removed from the catalog list and a deletion request is sent to the API.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "frontend action completeness for materials",
+          "sixSigmaMetric": "reduce UI workflow time for deleting materials from >2 mins to <5 seconds",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "System Authentication and Authorization",
+      "jtbd": "When accessing the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access or modification.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "reduce unauthorized access success rate from 100% to 0%",
+      "tocConstraintRef": "system access security control",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Enforce authentication for accessing the catalog and modifying materials."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement authentication guard for catalog access",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing the security layer for this epic, I want to add an authentication check, so that unauthenticated users are blocked from viewing or changing materials.",
+          "acceptanceCriteria": "Given an unauthenticated user\nWhen they attempt to access the catalog\nThen they are blocked and prompted to log in.\nGiven an unauthenticated user\nWhen they attempt to create or modify a material\nThen their access attempt is rejected and they are redirected to authentication.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "unprotected endpoint access",
+          "sixSigmaMetric": "increase endpoint protection coverage from 0% to 100% of restricted routes",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    }
+  ]
+}
