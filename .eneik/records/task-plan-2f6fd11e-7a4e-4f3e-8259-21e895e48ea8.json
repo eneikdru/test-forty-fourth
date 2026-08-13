@@ -1,0 +1,98 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Reduce generic material misclassification from >20% to <1%",
+      "tocConstraintRef": "Backend data structure rigidity",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add protocol-specific attributes validation and storage to the existing material management logic",
+        "R2: Add data-specific structural attributes validation and storage to the existing material management logic"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Patch material management to support protocol and data attributes",
+          "roleTag": "BARCAN-TAG-02",
+          "jtbd": "When implementing distinct entities for this epic, I want to patch the existing material logic to handle protocol and data attributes, so that researchers can manage them correctly",
+          "acceptanceCriteria": "Given a user wants to add a protocol, when they submit the details, then the system validates and stores protocol-specific attributes (such as procedural steps and author approvals).\nGiven a user wants to upload epidemiological data, when they submit the data, then the system validates and stores data-specific structures (such as sample metrics and collection parameters).\nGiven the code changes are made, when tests are run, then the unit and integration tests verify the protocol and data storage along with backwards compatibility.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Single generic material parser in existing logic",
+          "sixSigmaMetric": "Increase protocol and data validation test coverage from 0% to 100%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Increase protocol change auditability from 0% to 100%",
+      "tocConstraintRef": "Lack of auditability on protocol changes",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Track previous versions and maintain a revision history when an epidemiological protocol or material description is updated",
+        "R2: Expose the revision history to the existing detailed page so users can view who changed what, when, and past content"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Patch material update logic to support version history",
+          "roleTag": "BARCAN-TAG-02",
+          "jtbd": "When implementing version history for this epic, I want to track and expose previous versions within the existing codebase, so that users can audit changes and revert versions",
+          "acceptanceCriteria": "Given an existing protocol is edited and saved, when I view its detailed page, then I can see a list of historical revisions showing who changed what and when.\nGiven I view a past revision, when I request its content, then I can view the exact content of that past version.\nGiven the changes are made, when the test suite runs, then tests verify version tracking and retrieval without breaking existing features.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Missing revision history table and endpoints",
+          "sixSigmaMetric": "Decrease revision history retrieval latency to <100ms",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Decrease runtime failure rate from 100% to 0%",
+      "tocConstraintRef": "Broken deployment runtime blocking review",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Fix the runtime launch or health check failure to ensure the product runs correctly"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Fix product runtime launch and health check",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing the runtime fix for this epic, I want to patch the existing configuration or code to restore healthy launch, so that the product can be reviewed properly",
+          "acceptanceCriteria": "Given the product is in a broken runtime state, when the fix is applied, then the launch command completes successfully.\nGiven the product has launched, when the health check is executed, then it passes and confirms the system is healthy.\nGiven the fix is applied, when automated deployment tests run, then they verify the system launches correctly.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Invalid environment configuration or dependency version blocking startup",
+          "sixSigmaMetric": "Increase healthy boot success rate from 0% to 100% within 10s",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    }
+  ]
+}
