@@ -1,0 +1,98 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Reduce entity schema validation errors from >10% to <1%",
+      "tocConstraintRef": "Data model structural integrity bottleneck",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Validate and store protocol-specific attributes such as procedural steps and author approvals.",
+        "R2: Validate and store data-specific structures such as sample metrics and collection parameters."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Patch existing backend to support distinct protocol and data models",
+          "roleTag": "BARCAN-TAG-02",
+          "jtbd": "When implementing the structural models for this epic, I want to patch the Java backend logic, so that protocol and data attributes are properly managed.",
+          "acceptanceCriteria": "Given a protocol is submitted, When the backend processes it, Then it validates procedural steps and author approvals.\nGiven epidemiological data is uploaded, When the backend processes it, Then it validates sample metrics and collection parameters.\nGiven the patch is complete, When the integrated test suite runs, Then the QA coverage for these distinct models passes successfully.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Backend entity resolution bottleneck",
+          "sixSigmaMetric": "Reduce processing error rate for specific entities from >5% to <1%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "Epidemiological Material Revision History",
+      "jtbd": "When an epidemiological protocol or material description is updated, I want the system to track previous versions and maintain a revision history, so that I can audit changes and revert to older versions to ensure clinical compliance and procedural safety.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "Increase revision auditability coverage from 0% to 100%",
+      "tocConstraintRef": "Compliance and version audit bottleneck",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Track previous versions and maintain a revision history when an existing protocol or material is edited.",
+        "R2: Expose a list of historical revisions (with author and timestamp) and the content of any past version."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Patch backend to track and serve revision history",
+          "roleTag": "BARCAN-TAG-02",
+          "jtbd": "When implementing revision history for this epic, I want to patch the existing backend endpoints, so that historical changes are recorded and auditable.",
+          "acceptanceCriteria": "Given a protocol is edited and saved, When the changes are processed, Then the system tracks the previous version with author and timestamp.\nGiven a user requests a protocol's history, When they view the detailed page, Then the system provides a list of historical revisions and their content.\nGiven the implementation is applied, When the E2E verification runs, Then the QA tests covering the revision tracking pass.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Data version retrieval bottleneck",
+          "sixSigmaMetric": "Reduce history retrieval latency from >5s to <1s",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Increase runtime health check pass rate from 0% to 100%",
+      "tocConstraintRef": "System launch and observability bottleneck",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Fix the application launch and ensure the health check passes."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Fix runtime launch and health check",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing the launch fix for this epic, I want to patch the initialization process, so that the product runs healthily.",
+          "acceptanceCriteria": "Given the application is configured, When it is launched locally, Then the process starts without fatal errors.\nGiven the application is running, When the health check is queried, Then it returns a healthy status.\nGiven the fix is deployed, When automated verifications run, Then the integrated QA startup checks pass.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Container start initialization bottleneck",
+          "sixSigmaMetric": "Reduce startup failure rate from 100% to 0%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    }
+  ]
+}
