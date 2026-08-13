@@ -1,0 +1,94 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Reduce local setup time from >10 mins to <1 min",
+      "tocConstraintRef": "Developer onboarding and local verification bottleneck",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add a docker-compose.yml to start the full stack and expose a health-check endpoint."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add docker-compose for full stack and health check",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing containerization for this epic, I want to configure a docker-compose file, so that the full stack can be launched locally for real-world verification.",
+          "acceptanceCriteria": "Given the repository root, When I run docker-compose up, Then the full stack starts successfully.\nGiven the running stack, When I ping the health-check endpoint, Then it returns a 200 OK status.\nGiven the new docker-compose file, When the CI/CD pipeline runs, Then the container configuration is validated and smoke tests pass.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Local deployment missing environment parity",
+          "sixSigmaMetric": "Increase stack start success rate from 0% to 100% and reduce startup script time to <1 min",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Decrease time to update outdated materials from manual DB edit >5 mins to <1 min via UI",
+      "tocConstraintRef": "Content management bottleneck requiring direct database access",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Implement frontend UI to update and delete existing epidemiological materials."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement UI for updating and deleting materials",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing the catalog UI for this epic, I want to add edit and delete actions, so that the knowledge base can be updated directly from the browser.",
+          "acceptanceCriteria": "Given an existing material in the catalog, When the user clicks edit and submits valid changes, Then the frontend invokes the PUT API and updates the view.\nGiven an existing material in the catalog, When the user clicks delete and confirms, Then the frontend invokes the DELETE API and removes the item.\nGiven the modified frontend components, When the frontend test suite runs, Then unit and E2E tests pass validating the update and delete flows.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Missing frontend components for material management",
+          "sixSigmaMetric": "Increase UI action coverage for material updates from 0% to 100% and reduce frontend API call latency to <500ms",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "Authentication and Authorization System",
+      "jtbd": "When the end customer accesses the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "Reduce unauthorized data access incidents from undefined to 0",
+      "tocConstraintRef": "Security policy compliance bottleneck preventing external exposure",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Implement standard authentication mechanism to block unauthenticated access to the catalog."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement backend and frontend authentication mechanism",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing authentication for this epic, I want to configure the session mechanism, so that restricted protocols are protected from unauthorized access.",
+          "acceptanceCriteria": "Given an unauthenticated user, When they attempt to access restricted API endpoints, Then the backend returns a 401 Unauthorized response.\nGiven an unauthenticated user, When they access the frontend catalog, Then they are intercepted and prompted to log in.\nGiven the new security patch, When integration and E2E security tests run, Then all unauthorized access attempts are blocked across the stack.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Missing security layer for restricted endpoints",
+          "sixSigmaMetric": "Increase authentication check coverage on restricted routes from 0% to 100% and reduce unauthenticated request leak rate to 0%",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    }
+  ]
+}
