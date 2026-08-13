@@ -1,0 +1,88 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Start the full stack via a docker-compose.yml file at the repository root",
+        "R2: Expose a health-check endpoint to verify the stack's real-world behavior"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add docker-compose.yml with health check",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing the containerization for this epic, I want to create a docker-compose file, so that the full stack can be launched locally with a single command and verified.",
+          "acceptanceCriteria": "Given a clean checkout of the repository, When I run `docker-compose up`, Then the database, backend, and frontend containers start successfully.\nGiven the containers are running, When I send a GET request to the health-check endpoint, Then it responds with HTTP 200 OK.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "local environment setup time",
+          "sixSigmaMetric": "Reduce local environment setup time from manual steps to 1 command",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Update existing materials from the UI by invoking the corresponding PUT API endpoint",
+        "R2: Delete existing materials from the UI by invoking the corresponding DELETE API endpoint"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Wire up update and delete actions in existing material UI",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing the update and delete functionality for this epic, I want to patch the existing frontend views, so that users can trigger the PUT and DELETE endpoints directly from the UI.",
+          "acceptanceCriteria": "Given an existing material in the UI, When a user clicks edit and saves changes, Then the frontend invokes the PUT API endpoint with the updated data.\nGiven an existing material in the UI, When a user clicks delete and confirms, Then the frontend invokes the DELETE API endpoint to remove the material.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "material lifecycle management bottleneck",
+          "sixSigmaMetric": "Increase material management capability coverage from 50% to 100% of CRUD operations",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "System Authentication and Session Control",
+      "jtbd": "When accessing the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access or modification.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "Reduce unauthenticated unauthorized access incidents to 0",
+      "tocConstraintRef": "unrestricted access vulnerability",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Require users to authenticate before accessing the material catalog",
+        "R2: Block unauthenticated users from creating materials and prompt them to log in"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Patch existing code to enforce authentication checks",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing authentication for this epic, I want to add session checks to the existing endpoints and views, so that unauthenticated access is strictly blocked.",
+          "acceptanceCriteria": "Given an unauthenticated user, When they attempt to access the material catalog, Then they are redirected to the login prompt.\nGiven an unauthenticated user, When they attempt to create a new material via API or UI, Then the system blocks the action and returns an unauthorized error.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "system access control enforcement",
+          "sixSigmaMetric": "Increase authenticated session enforcement to 100% of restricted routes",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    }
+  ]
+}
