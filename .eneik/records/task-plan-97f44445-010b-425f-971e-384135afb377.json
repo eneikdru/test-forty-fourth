@@ -1,0 +1,98 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Increase accurately structured entity cataloging from 0% to >95%",
+      "tocConstraintRef": "Catalog semantic granularity",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Support distinct structural attributes for protocols in backend schema and logic",
+        "R2: Support specific structural metrics for raw epidemiological data in backend"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Patch schema and generic materials service to support protocols and raw data",
+          "roleTag": "BARCAN-TAG-02",
+          "jtbd": "When implementing distinct entities for this epic, I want to patch the existing materials schema and API to handle protocols and raw data, so that they are persisted with their specific structures.",
+          "acceptanceCriteria": "Given a protocol is added, When the payload includes procedural steps and author approvals, Then the system validates and stores them correctly, and automated tests verify this logic.\nGiven raw epidemiological data is uploaded, When the payload includes sample metrics, Then the system validates and persists it distinctively, and E2E tests confirm the flow.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Generic material parsing bottleneck",
+          "sixSigmaMetric": "Reduce unsupported entity type errors from 100% to 0%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Increase revision tracking coverage from 0% to 100% of material updates",
+      "tocConstraintRef": "Material auditability and compliance gap",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Track and store historical revisions of materials and protocols upon update",
+        "R2: Retrieve a list of historical revisions and view past version contents"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Patch materials API and schema to track revision history",
+          "roleTag": "BARCAN-TAG-02",
+          "jtbd": "When implementing versioning for this epic, I want to patch the existing storage and endpoints to maintain historical versions, so that clinical compliance is ensured.",
+          "acceptanceCriteria": "Given an existing protocol is edited and saved, When the update is processed, Then the previous version is archived in the revision history, and integration tests verify persistence.\nGiven a user requests a protocol's history, When they hit the details page, Then the API returns all historical revisions with author and timestamp, and QA tests ensure the data is immutable.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Missing revision tracking endpoint",
+          "sixSigmaMetric": "Reduce undocumented material changes from 100% to 0%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Increase application successful launch rate from 0% to 100%",
+      "tocConstraintRef": "Application runtime failure",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Fix the application startup and health check failure to ensure the environment runs successfully"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Fix application startup and restore health check",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When fixing the launch for this epic, I want to resolve the startup failure, so that the application boots properly and becomes available for evaluation.",
+          "acceptanceCriteria": "Given the application container is launched, When the entrypoint executes, Then the process starts successfully without crashing.\nGiven the application is running, When the health check endpoint is probed, Then it returns a healthy status, and CI integration tests confirm the green build.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Broken deployment runtime",
+          "sixSigmaMetric": "Reduce health check failures from 100% to 0%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    }
+  ]
+}
