@@ -1,0 +1,98 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Decrease entity representation errors from >10% to <1%",
+      "tocConstraintRef": "Data modeling accuracy bottleneck",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Store and manage protocol-specific attributes.",
+        "R2: Store and manage data-specific structures."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Patch backend to support distinct protocol and data entities",
+          "roleTag": "BARCAN-TAG-02",
+          "jtbd": "When implementing the entities for this epic, I want to manage protocol-specific and data-specific structures, so that researchers can search and view them as distinct entity types.",
+          "acceptanceCriteria": "Given a user wants to add a protocol, When they submit the details, Then the system validates and stores protocol-specific attributes, verified by included tests.\nGiven a user wants to upload epidemiological data, When they submit the data, Then the system validates and stores data-specific structures, verified by QA coverage.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Data model representation limit",
+          "sixSigmaMetric": "Reduce model validation failures from >5% to 0%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "Material Revision History",
+      "jtbd": "When an epidemiological protocol or material description is updated, I want the system to track previous versions and maintain a revision history, so that I can audit changes and revert to older versions.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "Reduce untracked high-risk procedure changes from 100% to 0%",
+      "tocConstraintRef": "Compliance audit trail bottleneck",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Track previous versions and maintain a revision history for protocols and materials.",
+        "R2: Display historical revisions with user, date, and content of past versions."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement revision history tracking and display",
+          "roleTag": "BARCAN-TAG-02",
+          "jtbd": "When implementing revision history for this epic, I want to track and expose previous versions, so that auditing changes is supported.",
+          "acceptanceCriteria": "Given an existing protocol is edited and saved, When I view its detailed page, Then I can see a list of historical revisions.\nGiven the historical revisions are displayed, When I select a past version, Then I can view its content, with all flows verified by included QA tests.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "History retrieval latency",
+          "sixSigmaMetric": "Reduce history retrieval time from >10s to <1s",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Improve successful launch rate from 0% to 100%",
+      "tocConstraintRef": "Deployment startup bottleneck",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Fix the runtime health check failure so the product launches successfully."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Fix runtime health check failure",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing the fix for this epic, I want to correct the health check observation, so that the full stack starts successfully.",
+          "acceptanceCriteria": "Given the application is configured to launch, When I start the full stack, Then the runtime health check passes and the product is healthy.\nGiven the fix is applied, When running tests, Then the E2E verification confirms successful deployment, covering the QA requirement.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Container health probe limits",
+          "sixSigmaMetric": "Reduce health check fail rate from 100% to 0%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    }
+  ]
+}
