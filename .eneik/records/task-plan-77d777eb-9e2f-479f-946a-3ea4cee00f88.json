@@ -1,0 +1,94 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "reduce local environment setup time from >10 mins to <1 min",
+      "tocConstraintRef": "bottleneck in local deployment and verification",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add docker-compose.yml at repository root to start the full stack and expose a health-check endpoint"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add docker-compose for full stack deployment",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing full stack deployment for this epic, I want to create a docker-compose configuration, so that the product can be verified locally.",
+          "acceptanceCriteria": "Given the repository root, When a developer runs docker-compose up, Then the backend and frontend start successfully.\nGiven the running stack, When a health-check is requested, Then a success response is returned.\nGiven the new docker-compose file, When the test suite runs, Then integration tests verify the health-check endpoint.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "bottleneck in containerized deployment",
+          "sixSigmaMetric": "reduce local setup time from >10 mins to <1 min",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "reduce time to correct material data from >5 mins to <1 min",
+      "tocConstraintRef": "bottleneck in material content maintenance",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Enable update and delete actions for materials in the UI"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Patch existing UI to support update and delete actions",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing material management for this epic, I want to expose update and delete actions in the existing UI, so that outdated entries can be corrected.",
+          "acceptanceCriteria": "Given an existing material, When a user clicks edit and saves, Then the PUT API is invoked and UI updates.\nGiven an existing material, When a user clicks delete and confirms, Then the DELETE API is invoked and UI updates.\nGiven the new UI actions, When E2E tests run, Then the update and delete workflows pass successfully.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "bottleneck in frontend action availability",
+          "sixSigmaMetric": "reduce manual DB corrections from >5 per week to 0",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "System Authentication and Authorization",
+      "jtbd": "When accessing the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access or modification.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "reduce unauthorized access incidents from unmeasured to 0",
+      "tocConstraintRef": "bottleneck in system security and access control",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Enforce authentication mechanism to protect catalog access"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Enable existing authentication mechanism",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing authentication for this epic, I want to patch the existing code to enforce access control, so that unauthenticated access is blocked.",
+          "acceptanceCriteria": "Given an unauthenticated user, When they attempt to access the catalog, Then they are blocked.\nGiven an unauthenticated user, When they attempt to create a material, Then they are prompted to log in.\nGiven the updated access controls, When security integration tests run, Then unauthorized access attempts are rejected.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "bottleneck in route protection",
+          "sixSigmaMetric": "reduce unauthenticated API access from 100% to 0%",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    }
+  ]
+}
