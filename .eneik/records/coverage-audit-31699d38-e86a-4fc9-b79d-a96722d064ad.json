@@ -1,0 +1,18 @@
+{
+  "gaps": [
+    {
+      "title": "Missing UI for updating and deleting materials",
+      "roleTag": "BARCAN-TAG-09",
+      "jtbd": "When maintaining the catalog, I want to update or delete existing epidemiological materials, so that the knowledge base accurately reflects the most current protocols without outdated entries.",
+      "acceptanceCriteria": "Given an existing material in the system, When a user chooses to edit or delete it from the UI, Then the frontend invokes the corresponding PUT or DELETE API endpoint and the catalog is updated accordingly.",
+      "reason": "literal brief requirement: The brief explicitly requires 'управления' (managing) materials, which encompasses updating and deleting, but the current UI only supports creation and reading."
+    },
+    {
+      "title": "Missing authentication and authorization mechanism",
+      "roleTag": "BARCAN-TAG-09",
+      "jtbd": "When accessing the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access or modification.",
+      "acceptanceCriteria": "Given an unauthenticated user, When they attempt to access the catalog or create a material, Then they are blocked and prompted to log in.",
+      "reason": "domain-standard expectation: A knowledge base managing sensitive epidemiological data and protocols inherently requires a standard authentication and session mechanism."
+    }
+  ]
+}
