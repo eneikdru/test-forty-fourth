@@ -1,0 +1,88 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add a docker-compose.yml at the repository root to start the full stack",
+        "R2: Expose a health-check endpoint for launch verification"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add docker-compose and health-check endpoint",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing containerization for this epic, I want to add a docker-compose.yml and a health-check endpoint, so that the full stack can be started and verified locally",
+          "acceptanceCriteria": "Given the repository root, When I run docker-compose up, Then the full stack starts successfully.\nGiven the running stack, When I ping the health-check endpoint, Then it returns a 200 OK status.\nGiven the test suite, When automated E2E and integration tests execute, Then the docker-compose setup and health-check endpoint are explicitly verified.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "local environment setup bottleneck",
+          "sixSigmaMetric": "reduce full stack startup time to under 1 minute",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Add an update action to the UI that invokes the PUT endpoint",
+        "R2: Add a delete action to the UI that invokes the DELETE endpoint"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Patch UI for updating and deleting materials",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing the update and delete UI for this epic, I want to add edit and delete actions to the existing material view, so that the knowledge base accurately reflects current protocols",
+          "acceptanceCriteria": "Given an existing material in the UI, When the user edits and saves, Then a PUT request is sent and the view updates.\nGiven an existing material in the UI, When the user deletes it, Then a DELETE request is sent and it is removed from the view.\nGiven the frontend test suite, When component logic (unit) and UI workflows (E2E) are tested, Then the update and delete actions are verified to function correctly.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "material lifecycle management bottleneck",
+          "sixSigmaMetric": "reduce material deprecation time to instant",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "Authentication and Authorization Mechanism",
+      "jtbd": "When accessing the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access or modification.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "reduce unauthorized access incidents to 0",
+      "tocConstraintRef": "system access control bottleneck",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Protect API endpoints with standard authentication",
+        "R2: Block unauthenticated access and redirect users to log in"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement authentication patch for API and UI",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing authentication for this epic, I want to enforce standard session protection on API endpoints and UI, so that restricted data is protected from unauthorized access",
+          "acceptanceCriteria": "Given an unauthenticated request to the API, When the request is received, Then it is blocked with a 401 status.\nGiven an unauthenticated user on the frontend, When they attempt to access restricted views, Then they are prompted to log in.\nGiven the test suite, When pure logic (unit), API flows (integration), and login journeys (E2E) execute, Then authentication enforcement is verified across all layers.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "authentication enforcement gap",
+          "sixSigmaMetric": "reduce unauthorized API access to 0",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    }
+  ]
+}
