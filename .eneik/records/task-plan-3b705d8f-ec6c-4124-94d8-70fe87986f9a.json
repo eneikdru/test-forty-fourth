@@ -1,0 +1,92 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "sixSigmaMetric": "Reduce local environment setup time from >1 hour to <5 minutes",
+      "tocConstraintRef": "Environment initialization bottleneck",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add a docker-compose.yml file at the repository root to start the full stack.",
+        "R2: Expose a health-check endpoint for the running product."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement Docker Compose Full Stack Startup",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing full stack containerization for this epic, I want to configure a single docker-compose.yml, so that the product can be launched and verified locally.",
+          "acceptanceCriteria": "Given the repository root, When a developer runs docker-compose up, Then the full stack starts successfully and integration checks verify the containers.\nGiven the running stack, When a request is made to the health-check endpoint, Then it returns a healthy status.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Local deployment wait time",
+          "sixSigmaMetric": "Decrease full stack startup failure rate to 0%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "sixSigmaMetric": "Reduce outdated material incident rate by 100%",
+      "tocConstraintRef": "Material catalog update cycle",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Provide UI support for updating an existing epidemiological material.",
+        "R2: Provide UI support for deleting an existing epidemiological material."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement Material Update and Delete UI",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing the update and delete actions for this epic, I want to wire the frontend UI to existing PUT and DELETE endpoints, so that materials can be modified or removed.",
+          "acceptanceCriteria": "Given an existing material, When a user edits it via the UI, Then the PUT API is called, the UI reflects changes, and UI tests pass.\nGiven an existing material, When a user deletes it via the UI, Then the DELETE API is called, it is removed, and tests verify removal.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Frontend material mutation capability",
+          "sixSigmaMetric": "Increase material management UI test coverage to 100%",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "Authentication and Authorization Mechanism",
+      "jtbd": "When accessing the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access or modification.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "Reduce unauthorized access attempts to 0%",
+      "tocConstraintRef": "System access security",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Implement user identity authentication.",
+        "R2: Block unauthenticated access to the catalog and prompt to log in."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement Basic Authentication and Access Control",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing access control for this epic, I want to add authentication checks, so that unauthenticated users are blocked and prompted to log in.",
+          "acceptanceCriteria": "Given an unauthenticated user, When they access the catalog, Then they are blocked, prompted to log in, and auth tests pass.\nGiven an authenticated user, When they access the catalog, Then they can view materials and tests verify access.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Authentication enforcement mechanism",
+          "sixSigmaMetric": "Increase protected route test coverage to 100%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    }
+  ]
+}
