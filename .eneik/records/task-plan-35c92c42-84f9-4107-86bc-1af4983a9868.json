@@ -1,0 +1,92 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add a docker-compose.yml (or equivalent) to the repository root that starts the full stack.",
+        "R2: Expose a health-check endpoint to verify the full stack is running correctly."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add docker-compose.yml for full stack start and health check",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing the docker setup for this epic, I want to add a docker-compose.yml file, so that the full stack can be started with a single command and verified.",
+          "acceptanceCriteria": "Given the repository root, When I run docker compose up, Then the full stack (backend, frontend, db) starts.\nGiven the stack is running, When I ping the health check endpoint, Then it returns a 200 OK status.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Missing Dockerfile or docker-compose execution",
+          "sixSigmaMetric": "Reduce local setup time to < 1 minute",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ],
+      "sixSigmaMetric": "Reduce time to local system start by 90%",
+      "tocConstraintRef": "Local Development Setup"
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Add UI support to update existing materials in the catalog.",
+        "R2: Add UI support to delete existing materials from the catalog."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Patch existing UI to support updating and deleting materials",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing the UI updates for this epic, I want to patch the existing UI code to invoke PUT and DELETE API endpoints, so that users can update and delete existing materials.",
+          "acceptanceCriteria": "Given an existing material, When a user clicks edit and saves changes in the UI, Then a PUT request is sent and the UI reflects the updated material.\nGiven an existing material, When a user clicks delete in the UI, Then a DELETE request is sent and the material is removed from the UI list.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Material Management UI",
+          "sixSigmaMetric": "Increase supported CRUD operations in UI from 50% to 100%",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ],
+      "sixSigmaMetric": "Increase percentage of materials accurately tracked in system to 100%",
+      "tocConstraintRef": "Material Data Entry Bottleneck"
+    },
+    {
+      "existingEpicId": null,
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Implement an authentication mechanism blocking unauthenticated access to the catalog.",
+        "R2: Implement an authentication mechanism blocking unauthenticated material creation."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Patch existing endpoints to enforce authentication",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing authentication for this epic, I want to patch the existing code to require session authentication, so that unauthorized access and modification are prevented.",
+          "acceptanceCriteria": "Given an unauthenticated user, When they try to access the catalog, Then they are blocked and prompted to log in.\nGiven an unauthenticated user, When they try to create a material, Then they are blocked and prompted to log in.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "System Security",
+          "sixSigmaMetric": "Implement 100% auth coverage on target API routes",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ],
+      "title": "System Authentication and Session Management",
+      "jtbd": "When accessing the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access or modification.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "Reduce unauthorized access incidents to 0",
+      "tocConstraintRef": "Data Access Governance"
+    }
+  ]
+}
