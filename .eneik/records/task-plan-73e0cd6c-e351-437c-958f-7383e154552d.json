@@ -1,0 +1,82 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add a docker-compose.yml at the repository root that starts the full stack and exposes a health-check endpoint."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Create docker-compose.yml for full stack startup",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing containerization for this epic, I want to add a docker-compose.yml, so that the product can be launched and verified for real.",
+          "acceptanceCriteria": "Given the repository root, When I run docker-compose up, Then the full stack starts successfully.\nGiven the running stack, When a test invokes the health-check endpoint, Then it returns a 200 OK status, satisfying the QA coverage rule.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Local environment observability",
+          "sixSigmaMetric": "Reduce local setup time to <1 minute",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Implement updating and deleting of existing epidemiological materials in the UI by invoking the corresponding PUT or DELETE API endpoints."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add edit and delete actions to materials UI",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing material management for this epic, I want to patch the existing UI to support update and delete, so that materials can be kept up to date.",
+          "acceptanceCriteria": "Given an existing material in the UI, When a user edits and saves it, Then the frontend invokes the PUT API endpoint and the view updates.\nGiven an existing material in the UI, When a test clicks delete, Then the frontend invokes the DELETE API endpoint and removes it from the view, satisfying the QA coverage rule.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Material catalog maintenance bottleneck",
+          "sixSigmaMetric": "Reduce outdated material retention to 0 days",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "Authentication and Authorization Mechanism",
+      "jtbd": "When accessing the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access or modification.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "Reduce unauthorized access incidents to 0",
+      "tocConstraintRef": "System security and access control bottleneck",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Block unauthenticated users from accessing or modifying the catalog by prompting them to log in."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement authentication block on catalog routes",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing security for this epic, I want to patch existing routes to require authentication, so that unauthorized access is prevented.",
+          "acceptanceCriteria": "Given an unauthenticated user, When they attempt to access the catalog or create a material, Then they are blocked and prompted to log in.\nGiven an unauthenticated user in automated tests, When the test attempts restricted access, Then the test verifies the blocking mechanism, satisfying the QA coverage rule.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Unauthenticated access vulnerability",
+          "sixSigmaMetric": "Increase authenticated request enforcement to 100%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    }
+  ]
+}
