@@ -1,0 +1,100 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Reduce time to start full stack from >1 hour to <5 minutes",
+      "tocConstraintRef": "Developer onboarding and local testing constraint",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add a docker-compose.yml file that starts the full stack",
+        "R2: Expose a health-check endpoint for the stack"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add docker-compose and health-check endpoint",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing containerization for this epic, I want to add a docker-compose.yml and expose a health-check endpoint, so that the system can be started locally and verified.",
+          "acceptanceCriteria": "Given the repository root, When I run docker-compose up, Then the full stack starts successfully.\nGiven the running stack, When I send a request to the health-check endpoint, Then it returns a 200 OK response.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Local deployment observability bottleneck",
+          "sixSigmaMetric": "Reduce local environment setup time from >10 mins to <1 min",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Reduce outdated material retention from >10% to <1%",
+      "tocConstraintRef": "Knowledge base freshness constraint",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Support updating existing epidemiological materials via the UI",
+        "R2: Support deleting existing epidemiological materials via the UI"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement UI for updating and deleting materials",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing material management for this epic, I want to add update and delete actions to the UI, so that the catalog can be maintained.",
+          "acceptanceCriteria": "Given an existing material in the UI, When a user edits it, Then the frontend calls the PUT API endpoint and updates the view.\nGiven an existing material in the UI, When a user deletes it, Then the frontend calls the DELETE API endpoint and removes it from the view.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Material catalog maintenance bottleneck",
+          "sixSigmaMetric": "Reduce time to update material from manual DB edit to <1 min via UI",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "Authentication and Access Control",
+      "jtbd": "When accessing the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "Reduce unauthorized access incidents from current to 0",
+      "tocConstraintRef": "Data security and compliance bottleneck",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Block unauthenticated users from accessing the catalog or creating materials",
+        "R2: Prompt blocked users to log in"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement authentication block and login prompt",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing access control for this epic, I want to block unauthenticated users and prompt them to log in, so that restricted data is protected.",
+          "acceptanceCriteria": "Given an unauthenticated user, When they attempt to access the catalog or create a material, Then they are blocked from the restricted routes.\nGiven a blocked access attempt, When the block occurs, Then the user is prompted to log in to authenticate their identity.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Unauthenticated access vulnerability",
+          "sixSigmaMetric": "Increase the percentage of authorized access to 100%",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    }
+  ]
+}
