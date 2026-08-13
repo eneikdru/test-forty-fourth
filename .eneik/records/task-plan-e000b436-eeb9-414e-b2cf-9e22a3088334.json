@@ -1,0 +1,100 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Reduce system startup time from >10 minutes to <1 minute",
+      "tocConstraintRef": "Local environment setup bottleneck",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add a docker-compose.yml at the repository root",
+        "R2: Expose a health-check endpoint"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add docker-compose.yml for full stack",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing the containerization for this epic, I want to create a docker-compose.yml file, so that the full stack can be launched with a single command",
+          "acceptanceCriteria": "Given the repository root without a docker-compose file\nWhen a developer runs docker-compose up\nThen the full stack starts successfully\nAnd a health-check endpoint is exposed and returns a 200 OK",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Absence of automated local deployment script",
+          "sixSigmaMetric": "Reduce local deployment command count from >5 to 1",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Reduce outdated material retention from >5% to 0%",
+      "tocConstraintRef": "Material lifecycle management UI bottleneck",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Invoke PUT API endpoint to update existing material",
+        "R2: Invoke DELETE API endpoint to delete existing material"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Patch existing UI for material update and delete",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing material management UI for this epic, I want to add update and delete actions to the existing material view, so that users can modify the catalog",
+          "acceptanceCriteria": "Given an existing material in the system\nWhen a user chooses to edit or delete it from the UI\nThen the frontend invokes the corresponding PUT or DELETE API endpoint\nAnd the catalog view is updated accordingly",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Frontend UI missing edit and delete controls",
+          "sixSigmaMetric": "Decrease user time to update or delete material from >5 mins to <30 seconds",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "Authentication and Authorization Mechanism",
+      "jtbd": "When accessing the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access or modification.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "Reduce unauthorized access incidents from >0 to 0",
+      "tocConstraintRef": "System security and access control bottleneck",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Block unauthenticated users from accessing the catalog",
+        "R2: Prompt unauthenticated users to log in"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Patch security layer for authentication",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing the authentication mechanism for this epic, I want to add session validation, so that unauthorized access to epidemiological materials is prevented",
+          "acceptanceCriteria": "Given an unauthenticated user\nWhen they attempt to access the catalog or create a material\nThen they are blocked from accessing the resource\nAnd they are prompted to log in",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Missing session validation logic in access layer",
+          "sixSigmaMetric": "Increase authenticated request coverage from 0% to 100% on protected routes",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    }
+  ]
+}
