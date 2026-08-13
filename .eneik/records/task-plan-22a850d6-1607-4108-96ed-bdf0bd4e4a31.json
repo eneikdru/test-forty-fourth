@@ -1,0 +1,100 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Reduce local setup time from undocumented/manual to a single docker-compose up command with 100% startup success rate",
+      "tocConstraintRef": "local environment setup blocking end-to-end verification",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: A docker-compose.yml file must be present at the repository root to start the full stack",
+        "R2: A health-check endpoint must be exposed to verify the system is running"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add Docker Compose and health check for full stack execution",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing the local containerization for this epic, I want to provide a docker-compose file, so that the full stack can be launched reliably",
+          "acceptanceCriteria": "Given a clean checkout of the repository\nWhen a user runs docker-compose up\nThen the backend, frontend, and database start successfully\nGiven the running stack\nWhen a request is made to the health-check endpoint\nThen a healthy status is returned",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "developer environment setup friction",
+          "sixSigmaMetric": "100% container startup success without manual configuration",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Reduce outdated protocol count to 0 by enabling immediate update/delete actions",
+      "tocConstraintRef": "inability to remove obsolete epidemiological protocols from the active catalog",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: The UI must allow updating an existing epidemiological material",
+        "R2: The UI must allow deleting an existing epidemiological material"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement UI controls for updating and deleting materials",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing material management UI for this epic, I want to add edit and delete buttons, so that obsolete records can be removed or modified",
+          "acceptanceCriteria": "Given an existing material in the catalog view\nWhen a user clicks the edit button and submits changes\nThen the frontend invokes the PUT API and updates the view\nGiven an existing material in the catalog view\nWhen a user clicks delete and confirms\nThen the frontend invokes the DELETE API and removes it from the view",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "manual database edits required for content maintenance",
+          "sixSigmaMetric": "100% functional coverage of CRUD operations in the UI",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "Authentication and Session Management",
+      "jtbd": "When accessing the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access or modification.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "Reduce unauthorized access incidents to 0% by enforcing strict authentication gates",
+      "tocConstraintRef": "unrestricted access exposing sensitive data",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: The system must require users to log in before accessing the catalog or creating a material",
+        "R2: Unauthenticated users attempting to access protected resources must be blocked and redirected to login"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement authentication gate for sensitive resources",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing access control for this epic, I want to add an authentication interceptor, so that all protected routes enforce identity verification",
+          "acceptanceCriteria": "Given an unauthenticated user\nWhen they attempt to access the catalog\nThen they are blocked and prompted to log in\nGiven an authenticated user\nWhen they access the catalog\nThen they are granted access",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "security vulnerability due to lack of auth",
+          "sixSigmaMetric": "100% block rate for unauthenticated requests to protected endpoints",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    }
+  ]
+}
