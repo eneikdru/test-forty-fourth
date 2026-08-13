@@ -1,0 +1,100 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "increase successful local deployments from 0% to >99%",
+      "tocConstraintRef": "local environment setup time",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add docker-compose.yml for full stack containerization",
+        "R2: Expose health-check endpoint for verification"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add docker-compose and health-check",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing containerization for this epic, I want to add a docker-compose file and health check, so that local verification is possible.",
+          "acceptanceCriteria": "Given a local environment without Docker setup, When a user runs docker-compose up, Then the full stack containers start successfully.\nGiven a running full stack, When a health-check request is made, Then a success status is returned.\nGiven the implementation slice, When QA verifies the setup, Then tests confirm correct startup and observability.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Docker configuration missing",
+          "sixSigmaMetric": "reduce full stack startup time from >10 mins to <1 min",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "reduce invalid protocol entries from >5% to <1%",
+      "tocConstraintRef": "knowledge base update cycle latency",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Implement UI action to update existing materials via PUT",
+        "R2: Implement UI action to delete materials via DELETE"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add UI for updating and deleting materials",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing the catalog UI for this epic, I want to connect update and delete actions to the API, so that the knowledge base remains accurate.",
+          "acceptanceCriteria": "Given an existing material in the catalog, When the user updates it in the UI, Then the frontend invokes the PUT API endpoint and updates the view.\nGiven an outdated material, When the user clicks delete, Then the frontend invokes the DELETE API endpoint and removes it from the view.\nGiven the implementation slice, When QA verifies the changes, Then tests confirm the update and delete functionality works end-to-end.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "UI actions for PUT and DELETE missing",
+          "sixSigmaMetric": "reduce time to update or delete material from >5 mins to <1 min",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "Authentication and Authorization Mechanism",
+      "jtbd": "When a researcher opens the platform, I want to enforce secure login controls, so that sensitive medical data cannot be viewed or altered by public users.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "reduce unauthorized access incidents from >0 to 0",
+      "tocConstraintRef": "system access control vulnerability",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Block unauthenticated access to the catalog",
+        "R2: Prompt unauthenticated users to log in"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement authentication blocking and login prompt",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing access control for this epic, I want to block unauthenticated requests and prompt for login, so that restricted data is protected.",
+          "acceptanceCriteria": "Given an unauthenticated user, When they attempt to access restricted catalog endpoints, Then they are blocked with a 401 response.\nGiven an unauthenticated user on the UI, When they are blocked, Then they are prompted to log in.\nGiven the implementation slice, When QA verifies the security, Then integration tests confirm unauthorized users cannot access restricted resources.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "unauthorized endpoint access path",
+          "sixSigmaMetric": "increase unauthorized request rejection rate from 0% to 100%",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    }
+  ]
+}
