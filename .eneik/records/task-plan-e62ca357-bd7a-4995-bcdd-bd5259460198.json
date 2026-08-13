@@ -1,0 +1,100 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Decrease local setup error rate from >50% to <5%",
+      "tocConstraintRef": "Local Environment Provisioning",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add docker-compose.yml to start the full stack",
+        "R2: Expose a health-check endpoint for verification"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add docker-compose and health-check endpoint",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing containerization for this epic, I want to add a docker-compose.yml and a health-check endpoint, so that the stack can be launched locally with a single command.",
+          "acceptanceCriteria": "Given a clean checkout of the repository, When docker-compose up is executed, Then the backend and frontend start successfully and the health-check endpoint returns HTTP 200.\nGiven a running stack, When unit and E2E tests are executed, Then all tests pass successfully.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Deployment Verification Feedback Loop",
+          "sixSigmaMetric": "Reduce local setup time from >10 mins to <1 min",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Increase catalog update completion rate from 0% to >99%",
+      "tocConstraintRef": "Knowledge Base Staleness",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Add UI functionality to update an existing material",
+        "R2: Add UI functionality to delete an existing material"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement material update and delete in UI",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing material management for this epic, I want to patch the existing UI to support update and delete actions, so that the knowledge base accurately reflects the most current protocols.",
+          "acceptanceCriteria": "Given an existing material, When a user edits and saves it in the UI, Then a PUT request is made and the updated data is displayed.\nGiven an existing material, When a user deletes it in the UI, Then a DELETE request is made and the material is removed from the catalog.\nGiven the updated UI, When E2E and integration tests run, Then update and delete flows pass successfully.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Material Management Turnaround Time",
+          "sixSigmaMetric": "Reduce material update cycle from >10 mins to <1 min",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "Authentication and Authorization Mechanism",
+      "jtbd": "When accessing the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access or modification.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "Decrease unauthorized access attempts from unknown to 0%",
+      "tocConstraintRef": "Data Security Compliance",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Block unauthenticated users from accessing the catalog",
+        "R2: Prompt unauthenticated users to log in"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement authentication and session mechanism",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing the authentication mechanism for this epic, I want to introduce a session verification layer, so that restricted data is protected.",
+          "acceptanceCriteria": "Given an unauthenticated user, When they attempt to access restricted endpoints, Then they receive a 401 response and are prompted to log in.\nGiven valid credentials, When a user authenticates, Then a secure session is established.\nGiven the authentication implementation, When integration and E2E security tests run, Then unauthenticated access is strictly blocked.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Session Creation Latency",
+          "sixSigmaMetric": "Reduce unauthorized access risk from 100% to 0%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    }
+  ]
+}
