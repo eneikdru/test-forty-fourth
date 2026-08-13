@@ -1,0 +1,88 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "sixSigmaMetric": "Increase successful local deployments to 100%",
+      "tocConstraintRef": "Local environment setup time",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add a docker-compose.yml file that starts the full stack and exposes a health-check endpoint."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add docker-compose for local environment",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing containerization for this epic, I want to define the full stack in docker-compose, so that the product can be launched locally with a single command.",
+          "acceptanceCriteria": "Given a developer with Docker installed, When they run docker-compose up, Then all backend and frontend services start successfully and integration tests pass.\nGiven the services are running, When the health-check endpoint is accessed, Then it returns a healthy status, covered by E2E availability tests.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Local setup overhead",
+          "sixSigmaMetric": "Reduce local setup time to under 1 minute",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "sixSigmaMetric": "Reduce outdated materials by enabling direct editing",
+      "tocConstraintRef": "Material update process",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Add UI controls and API integration to update an existing epidemiological material.",
+        "R2: Add UI controls and API integration to delete an existing epidemiological material."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement material update and delete UI",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing material management UI for this epic, I want to add update and delete actions, so that the knowledge base can be accurately maintained.",
+          "acceptanceCriteria": "Given an existing material in the catalog, When a user selects to edit it and submits the changes, Then the frontend issues a PUT request and updates the displayed list, validated by component unit tests.\nGiven an existing material in the catalog, When a user selects to delete it, Then the frontend issues a DELETE request and removes it from the displayed list, validated by integration tests.\nGiven the material catalog UI, When a user performs edit and delete actions, Then E2E tests successfully verify the complete lifecycle journey.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Material lifecycle UI bottleneck",
+          "sixSigmaMetric": "Decrease time to update or delete a material by 50%",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "Authentication and Session Management",
+      "jtbd": "When accessing the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access or modification.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "Reduce unauthorized access incidents to zero",
+      "tocConstraintRef": "System security baseline",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Implement authentication and session mechanism to block unauthenticated access to the catalog and material creation."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement authentication filter for restricted endpoints",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing access control for this epic, I want to add authentication validation, so that unauthorized users are prompted to log in.",
+          "acceptanceCriteria": "Given an unauthenticated user, When they attempt to access the catalog or create a material, Then the system blocks the request and returns an unauthorized status, verified by unit and integration tests.\nGiven an authenticated user with a valid session, When they access the catalog, Then the system processes the request normally, verified by E2E login and access tests.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Endpoint security enforcement",
+          "sixSigmaMetric": "Increase authentication check coverage to 100% of restricted endpoints",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    }
+  ]
+}
