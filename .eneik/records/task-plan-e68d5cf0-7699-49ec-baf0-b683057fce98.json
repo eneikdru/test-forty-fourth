@@ -1,0 +1,90 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "title": "System Containerization and Deployment",
+      "jtbd": "When running the product locally, I want to start the full stack with a single command, so that I can verify its real-world behavior and observability.",
+      "sixSigmaMetric": "Reduce full stack startup time to under 1 minute",
+      "tocConstraintRef": "Local testing environment availability",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add a docker-compose.yml to the repository root that starts the full stack and exposes a health-check endpoint."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Create docker-compose.yml for full stack",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing containerization for this epic, I want to add a docker-compose.yml, so that the full stack can be launched locally.",
+          "acceptanceCriteria": "Given a local development environment, When the user runs docker-compose up, Then the full stack starts successfully.\nGiven the running stack, When the health-check endpoint is queried, Then it returns a success response.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Local testing setup time",
+          "sixSigmaMetric": "Reduce local startup configuration time to zero",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "title": "Epidemiological Material Cataloging and Management",
+      "jtbd": "When I manage the epidemiology knowledge base, I want to catalog and update materials, so that the information is structured and up to date.",
+      "sixSigmaMetric": "Increase material update speed by 50%",
+      "tocConstraintRef": "Content freshness",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Implement update and delete actions in the existing UI to call existing PUT and DELETE endpoints."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add update and delete actions to material UI",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing material management for this epic, I want to add update and delete actions to the UI, so that the catalog accurately reflects current protocols.",
+          "acceptanceCriteria": "Given an existing material in the catalog, When a user clicks edit and saves changes, Then the frontend calls the PUT endpoint and updates the view.\nGiven an existing material, When a user clicks delete, Then the frontend calls the DELETE endpoint and removes it from the view.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Material management UI capability",
+          "sixSigmaMetric": "Reduce outdated material deletion time from undefined to < 5 seconds",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "Authentication and Authorization",
+      "jtbd": "When accessing the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access or modification.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "Reduce unauthorized access incidents to 0",
+      "tocConstraintRef": "Data security compliance",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Enforce authentication for accessing the catalog or creating a material, blocking unauthenticated users and prompting them to log in."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement standard authentication mechanism",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing access control for this epic, I want to enforce standard authentication, so that restricted data is protected.",
+          "acceptanceCriteria": "Given an unauthenticated user, When they attempt to access the catalog, Then they are blocked and prompted to log in.\nGiven an unauthenticated user, When they attempt to create a material, Then they are blocked and prompted to log in.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Authentication enforcement mechanism",
+          "sixSigmaMetric": "Increase authentication coverage to 100% for restricted endpoints",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    }
+  ]
+}
