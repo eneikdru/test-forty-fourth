@@ -1,0 +1,96 @@
+{
+    "epics": [
+        {
+            "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+            "title": null,
+            "jtbd": null,
+            "kanoClass": null,
+            "cynefinDomain": null,
+            "sixSigmaMetric": "Reduce local full-stack startup time from >10 minutes to <1 minute.",
+            "tocConstraintRef": "Developer environment provisioning bottleneck.",
+            "sourceIndex": 0,
+            "requirements": [
+                "R1: Add a docker-compose.yml file at the repository root that starts the full stack.",
+                "R2: Expose a health-check endpoint for verification."
+            ],
+            "coverageComplete": true,
+            "slices": [
+                {
+                    "title": "Add docker-compose.yml and health-check",
+                    "roleTag": "BARCAN-TAG-05",
+                    "jtbd": "When implementing containerization for this epic, I want to create a single docker-compose setup and health-check, so that the full stack can be started and verified locally.",
+                    "acceptanceCriteria": "Given the repository without a local container setup, When the user runs docker-compose up, Then the backend and frontend start successfully.\nGiven the running stack, When a request is made to the health-check endpoint, Then a healthy status is returned and tests confirm the services are integrated.",
+                    "leanValue": "essential",
+                    "cynefinDomain": "clear",
+                    "tocConstraintRef": "Missing container orchestration and health probes.",
+                    "sixSigmaMetric": "Decrease time to verify stack health locally from >5 mins to <10 seconds via health-check.",
+                    "hasUi": false,
+                    "requirementRefs": [
+                        "R1",
+                        "R2"
+                    ]
+                }
+            ]
+        },
+        {
+            "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+            "title": null,
+            "jtbd": null,
+            "kanoClass": null,
+            "cynefinDomain": null,
+            "sixSigmaMetric": "Increase the percentage of materials that are fully up to date from <80% to 100%.",
+            "tocConstraintRef": "Material obsolescence bottleneck.",
+            "sourceIndex": 1,
+            "requirements": [
+                "R1: Implement update and delete UI for materials."
+            ],
+            "coverageComplete": true,
+            "slices": [
+                {
+                    "title": "Implement material update and delete UI",
+                    "roleTag": "BARCAN-TAG-11",
+                    "jtbd": "When implementing the UI updates for this epic, I want to add edit and delete actions, so that materials can be modified or removed directly from the interface.",
+                    "acceptanceCriteria": "Given an existing material in the system, When a user chooses to edit it from the UI, Then the frontend invokes the corresponding PUT API endpoint and the catalog is updated.\nGiven an existing material, When a user chooses to delete it, Then the frontend invokes the DELETE API endpoint and it is removed from the view, with UI component tests verifying these interactions.",
+                    "leanValue": "essential",
+                    "cynefinDomain": "clear",
+                    "tocConstraintRef": "Missing frontend mutation controls.",
+                    "sixSigmaMetric": "Reduce the UI time to delete or update a record from infinite (workaround needed) to <30 seconds.",
+                    "hasUi": true,
+                    "requirementRefs": [
+                        "R1"
+                    ]
+                }
+            ]
+        },
+        {
+            "existingEpicId": null,
+            "title": "System Authentication and Authorization",
+            "jtbd": "When accessing the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access or modification.",
+            "kanoClass": "Must-Be",
+            "cynefinDomain": "clear",
+            "sixSigmaMetric": "Decrease the rate of unauthorized access events from >0% to 0%.",
+            "tocConstraintRef": "Data security compliance bottleneck.",
+            "sourceIndex": 2,
+            "requirements": [
+                "R1: Implement user authentication and access blocking for unauthenticated users."
+            ],
+            "coverageComplete": true,
+            "slices": [
+                {
+                    "title": "Implement basic authentication blocking",
+                    "roleTag": "BARCAN-TAG-07",
+                    "jtbd": "When implementing authentication for this epic, I want to block unauthenticated access, so that restricted materials are protected.",
+                    "acceptanceCriteria": "Given an unauthenticated user, When they attempt to access the catalog or create a material, Then they are blocked.\nGiven a blocked attempt, When the user is redirected, Then they are prompted to log in, and integration tests verify the endpoints correctly return 401 Unauthorized.",
+                    "leanValue": "essential",
+                    "cynefinDomain": "clear",
+                    "tocConstraintRef": "Unauthenticated access vulnerability.",
+                    "sixSigmaMetric": "Reduce unauthenticated request success rate from 100% to 0% for protected routes.",
+                    "hasUi": true,
+                    "requirementRefs": [
+                        "R1"
+                    ]
+                }
+            ]
+        }
+    ]
+}
