@@ -1,0 +1,18 @@
+{
+  "gaps": [
+    {
+      "title": "Missing UI for updating and deleting materials",
+      "roleTag": "BARCAN-TAG-09",
+      "jtbd": "When maintaining the catalog, I want to update or delete existing epidemiological materials via the user interface, so that the knowledge base accurately reflects current protocols without outdated entries.",
+      "acceptanceCriteria": "Given an existing material in the catalog, When a user selects it and attempts to edit or delete it, Then the user interface provides functional controls that invoke the PUT or DELETE API endpoints, updating or removing the record dynamically in the database and list view.",
+      "reason": "literal brief requirement: The brief explicitly requires 'управления' (managing/management) of epidemiological materials, protocols, and data. While the backend provides PUT and DELETE API endpoints, the frontend UI is strictly read-only for existing records and completely lacks controls or forms for modifying or deleting them."
+    },
+    {
+      "title": "Missing authentication and access control mechanism",
+      "roleTag": "BARCAN-TAG-09",
+      "jtbd": "When accessing the epidemiological knowledge base, I want to authenticate my identity and have my actions governed by roles, so that sensitive biological protocols and hazardous strain metadata are protected from unauthorized viewing or modification.",
+      "acceptanceCriteria": "Given any user trying to view or edit the catalog, When they access the system, Then they must authenticate via a login screen, and only authorized scientific or administrative personnel should be allowed to modify or delete materials.",
+      "reason": "domain-standard expectation: An epidemiological knowledge base handling sensitive laboratory procedures, hazardous viral strains, and medical data inherently requires robust authentication and role-based access control to prevent bio-security risks, unauthorized modifications, and unauthorized data leakage."
+    }
+  ]
+}
