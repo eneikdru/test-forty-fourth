@@ -1,0 +1,94 @@
+{
+    "epics": [
+        {
+            "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+            "title": null,
+            "jtbd": null,
+            "kanoClass": null,
+            "cynefinDomain": null,
+            "sixSigmaMetric": "reduce manual local environment setup time from >10 mins to <1 min",
+            "tocConstraintRef": "local development onboarding bottleneck",
+            "sourceIndex": 0,
+            "requirements": [
+                "R1: Add docker-compose.yml to start the full stack and expose a health-check endpoint"
+            ],
+            "coverageComplete": true,
+            "slices": [
+                {
+                    "title": "Create docker-compose.yml for full stack",
+                    "roleTag": "BARCAN-TAG-05",
+                    "jtbd": "When implementing containerization for this epic, I want to add a docker-compose.yml, so that the product can be launched and verified locally",
+                    "acceptanceCriteria": "Given the repository root\nWhen running docker-compose up\nThen the full stack starts successfully\nAnd a health-check endpoint is exposed and reachable",
+                    "leanValue": "essential",
+                    "cynefinDomain": "clear",
+                    "tocConstraintRef": "docker build and run bottleneck",
+                    "sixSigmaMetric": "reduce manual container startup commands from >3 to 1",
+                    "hasUi": false,
+                    "requirementRefs": [
+                        "R1"
+                    ]
+                }
+            ]
+        },
+        {
+            "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+            "title": null,
+            "jtbd": null,
+            "kanoClass": null,
+            "cynefinDomain": null,
+            "sixSigmaMetric": "reduce outdated material resolution time from >24 hours to <5 minutes",
+            "tocConstraintRef": "material management workflow bottleneck",
+            "sourceIndex": 1,
+            "requirements": [
+                "R1: Add UI actions to edit or delete existing materials that invoke existing API endpoints"
+            ],
+            "coverageComplete": true,
+            "slices": [
+                {
+                    "title": "Implement update and delete UI for materials",
+                    "roleTag": "BARCAN-TAG-11",
+                    "jtbd": "When implementing the frontend management for this epic, I want to patch the existing UI to add update and delete actions, so that outdated materials can be removed or corrected",
+                    "acceptanceCriteria": "Given an existing material in the catalog\nWhen a user clicks edit or delete\nThen the frontend invokes the corresponding PUT or DELETE API\nAnd the catalog view reflects the updated state",
+                    "leanValue": "essential",
+                    "cynefinDomain": "clear",
+                    "tocConstraintRef": "frontend action availability bottleneck",
+                    "sixSigmaMetric": "reduce UI steps for material updates from >10 (manual api) to 2",
+                    "hasUi": true,
+                    "requirementRefs": [
+                        "R1"
+                    ]
+                }
+            ]
+        },
+        {
+            "existingEpicId": null,
+            "title": "User Authentication and Authorization",
+            "jtbd": "When accessing the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access or modification.",
+            "kanoClass": "Must-Be",
+            "cynefinDomain": "clear",
+            "sixSigmaMetric": "reduce unauthenticated system access incidents from >0 to 0 per month",
+            "tocConstraintRef": "system access security bottleneck",
+            "sourceIndex": 2,
+            "requirements": [
+                "R1: Enforce authentication and prompt unauthenticated users to log in before accessing the catalog or creating materials"
+            ],
+            "coverageComplete": true,
+            "slices": [
+                {
+                    "title": "Enforce authentication on catalog and material creation",
+                    "roleTag": "BARCAN-TAG-07",
+                    "jtbd": "When implementing access control for this epic, I want to patch the existing codebase to enforce login, so that restricted data is protected",
+                    "acceptanceCriteria": "Given an unauthenticated user\nWhen they attempt to access the catalog or create a material\nThen they are blocked\nAnd prompted to log in",
+                    "leanValue": "essential",
+                    "cynefinDomain": "clear",
+                    "tocConstraintRef": "authorization enforcement bottleneck",
+                    "sixSigmaMetric": "reduce unauthenticated endpoints from >5 to 0",
+                    "hasUi": false,
+                    "requirementRefs": [
+                        "R1"
+                    ]
+                }
+            ]
+        }
+    ]
+}
