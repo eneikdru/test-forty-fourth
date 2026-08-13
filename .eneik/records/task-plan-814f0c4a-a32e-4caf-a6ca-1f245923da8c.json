@@ -1,0 +1,96 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": null,
+      "tocConstraintRef": null,
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add a docker-compose.yml file at the repository root that starts the full stack and exposes a health-check endpoint."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Create docker-compose.yml for full stack startup",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing the containerization for this epic, I want to configure a docker-compose.yml, so that the full stack can be started with a single command and observability is verified.",
+          "acceptanceCriteria": "Given a clean checkout of the repository\nWhen a developer runs `docker-compose up`\nThen the backend and frontend containers start successfully.\nGiven the containers are running\nWhen an HTTP GET request is made to the health-check endpoint\nThen it returns an HTTP 200 OK status, confirming integration and QA requirements are met end-to-end.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Environment setup time",
+          "sixSigmaMetric": "Reduce local setup time to < 5 minutes",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": null,
+      "tocConstraintRef": null,
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Add UI functionality to update existing epidemiological materials.",
+        "R2: Add UI functionality to delete existing epidemiological materials."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement UI for updating and deleting materials",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing material management UI for this epic, I want to add update and delete actions, so that the knowledge base accurately reflects the most current protocols.",
+          "acceptanceCriteria": "Given an existing material in the system\nWhen a user submits edited details via the UI\nThen the frontend successfully invokes the PUT API endpoint and updates the display.\nGiven an existing material\nWhen a user confirms deletion\nThen the frontend invokes the DELETE API endpoint and removes the item from the catalog view, with E2E tests validating these UI flows.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Material lifecycle management UI",
+          "sixSigmaMetric": "Reduce outdated material removal time to < 30 seconds",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "Authentication and Authorization Mechanism",
+      "jtbd": "When accessing the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access or modification.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "Reduce unauthorized access incidents to 0",
+      "tocConstraintRef": "Data security and access control",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Block unauthenticated users from accessing the catalog or creating a material and prompt them to log in."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Enforce authentication for catalog access and material creation",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing access control for this epic, I want to enforce authentication on protected routes, so that restricted epidemiological protocols are protected from unauthorized access.",
+          "acceptanceCriteria": "Given an unauthenticated user\nWhen they attempt to access the catalog\nThen they are blocked and redirected to the login prompt.\nGiven an authenticated user\nWhen they attempt to access the catalog\nThen they are granted access to view and manage materials, with integration tests asserting valid and invalid session handling.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Unauthorized access risk",
+          "sixSigmaMetric": "Reduce unauthorized access incidents to 0",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    }
+  ]
+}
