@@ -41,6 +41,8 @@ public class SearchHttpServer {
         this.server = HttpServer.create(new InetSocketAddress(port), 0);
         this.server.createContext("/api/materials/search", new SearchHandler());
         this.server.createContext("/api/materials", new MaterialsHandler());
+        this.server.createContext("/api/health", new HealthHandler());
+        this.server.createContext("/health", new HealthHandler());
     }
 
     public void start() {
@@ -215,6 +217,45 @@ public class SearchHttpServer {
                 bos.write(buffer, 0, len);
             }
             return bos.toString(StandardCharsets.UTF_8);
+        }
+    }
+
+    private class HealthHandler implements HttpHandler {
+        @Override
+        public void handle(HttpExchange exchange) throws IOException {
+            String method = exchange.getRequestMethod();
+            if (!"GET".equalsIgnoreCase(method) && !"HEAD".equalsIgnoreCase(method)) {
+                sendError(exchange, 405, "METHOD_NOT_ALLOWED", "Only GET and HEAD methods are supported.");
+                return;
+            }
+            try (Connection conn = connectionSupplier.getConnection();
+                 java.sql.PreparedStatement pstmt = conn.prepareStatement("SELECT 1")) {
+                pstmt.execute();
+
+                String body = "{\"status\":\"healthy\",\"database\":\"connected\"}";
+                byte[] bytes = body.getBytes(StandardCharsets.UTF_8);
+                exchange.getResponseHeaders().set("Content-Type", "application/json; charset=utf-8");
+                if ("HEAD".equalsIgnoreCase(method)) {
+                    exchange.sendResponseHeaders(200, -1);
+                } else {
+                    exchange.sendResponseHeaders(200, bytes.length);
+                    try (OutputStream os = exchange.getResponseBody()) {
+                        os.write(bytes);
+                    }
+                }
+            } catch (Exception e) {
+                String body = "{\"status\":\"unhealthy\",\"reason\":\"" + escapeJson(e.getMessage()) + "\"}";
+                byte[] bytes = body.getBytes(StandardCharsets.UTF_8);
+                exchange.getResponseHeaders().set("Content-Type", "application/json; charset=utf-8");
+                if ("HEAD".equalsIgnoreCase(method)) {
+                    exchange.sendResponseHeaders(500, -1);
+                } else {
+                    exchange.sendResponseHeaders(500, bytes.length);
+                    try (OutputStream os = exchange.getResponseBody()) {
+                        os.write(bytes);
+                    }
+                }
+            }
         }
     }
 
