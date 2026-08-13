@@ -1,0 +1,94 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Decrease full stack local environment setup time from >10 mins to <1 min",
+      "tocConstraintRef": "Local development environment setup bottleneck",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add a docker-compose.yml at the repository root that starts the full stack and exposes a health-check endpoint."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Create docker-compose.yml for full stack",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing full stack containerization for this epic, I want to create a docker-compose configuration, so that the local deployment constraint is resolved.",
+          "acceptanceCriteria": "Given a local development environment, When the user executes docker-compose up, Then the full stack starts successfully.\nGiven the running stack, When querying the health-check endpoint, Then a successful status response is returned.\nGiven the Gricean QA exception, When verifying the container setup, Then validation tests prove the endpoints respond correctly.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Missing docker-compose infrastructure definition",
+          "sixSigmaMetric": "Reduce container orchestration setup time from manual to 0s",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Increase catalog data accuracy from <80% to 100% by enabling UI update and delete workflows",
+      "tocConstraintRef": "Catalog data maintenance bottleneck",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Provide UI to update and delete existing epidemiological materials, invoking PUT or DELETE API endpoints."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement update and delete UI for materials",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing the management UI for this epic, I want to add update and delete actions, so that users can manage existing materials directly.",
+          "acceptanceCriteria": "Given an existing material in the system, When a user chooses to edit it from the UI, Then the frontend invokes the corresponding PUT API endpoint and updates the view.\nGiven an existing material, When a user chooses to delete it, Then the frontend invokes the DELETE API endpoint and removes it from the catalog.\nGiven the Gricean QA exception, When verifying the UI actions, Then automated frontend tests confirm PUT and DELETE integration.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Missing frontend management components",
+          "sixSigmaMetric": "Reduce time to update or delete a material from >5 minutes to <30 seconds",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "System Authentication and Authorization",
+      "jtbd": "When accessing the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access or modification.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "Decrease unauthorized access incidents from >0 to 0 per month",
+      "tocConstraintRef": "System security access bottleneck",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Implement standard authentication and session mechanism to block unauthenticated access."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement authentication mechanism and login prompt",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing access control for this epic, I want to add authentication checks, so that unauthenticated access is blocked.",
+          "acceptanceCriteria": "Given an unauthenticated user, When they attempt to access the catalog, Then they are blocked from access.\nGiven an unauthenticated user, When they attempt to create a material, Then they are prompted to log in.\nGiven the Gricean QA exception, When verifying security rules, Then access control tests confirm unauthenticated requests are rejected.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Missing authentication middleware mechanism",
+          "sixSigmaMetric": "Increase authenticated request enforcement coverage from 0% to 100% on restricted routes",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    }
+  ]
+}
