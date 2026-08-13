@@ -1,0 +1,100 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "title": "System Containerization and Deployment",
+      "jtbd": "When running the product locally, I want to start the full stack with a single command, so that I can verify its real-world behavior and observability.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "reduce full stack startup and verification time from >10 mins to <1 min",
+      "tocConstraintRef": "local environment deployment process",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add a docker-compose.yml at the repository root that starts the full stack",
+        "R2: Expose a health-check endpoint for verification"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add docker-compose for full stack deployment",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing the docker-compose setup for this epic, I want to configure the full stack containers, so that the product can be launched and verified locally.",
+          "acceptanceCriteria": "Given a local checkout of the repository,\nWhen docker-compose up is executed,\nThen all backend and frontend services start successfully.\nGiven the running stack,\nWhen the health-check endpoint is queried,\nThen it returns a successful HTTP 200 status.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "docker-compose service configuration",
+          "sixSigmaMetric": "reduce manual container startup configuration errors from >1 per day to 0",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "title": "Epidemiological Material Cataloging and Management",
+      "jtbd": "When I manage the epidemiology knowledge base, I want to catalog and update materials, so that the information is structured and up to date.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "reduce time to update or delete a material from >5 mins to <1 min",
+      "tocConstraintRef": "material lifecycle management process",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Add UI capability to update an existing material via PUT endpoint",
+        "R2: Add UI capability to delete an existing material via DELETE endpoint"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement update and delete material UI patches",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing the update and delete material UI patches for this epic, I want to connect the frontend to the existing PUT and DELETE endpoints, so that the catalog accurately reflects the most current protocols.",
+          "acceptanceCriteria": "Given an existing material in the system,\nWhen a user chooses to edit it from the UI,\nThen the frontend invokes the corresponding PUT API endpoint and the catalog is updated.\nGiven an existing material in the system,\nWhen a user chooses to delete it from the UI,\nThen the frontend invokes the corresponding DELETE API endpoint and the catalog is updated.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "frontend material edit view",
+          "sixSigmaMetric": "reduce frontend API PUT/DELETE integration latency from manual to <500ms",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "Authentication and Authorization",
+      "jtbd": "When accessing the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access or modification.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "reduce unauthorized access incidents from >0 to 0",
+      "tocConstraintRef": "knowledge base access security",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Prompt unauthenticated users to log in when accessing the catalog",
+        "R2: Block unauthenticated users from creating materials"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement authentication and route protection",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing authentication for this epic, I want to protect the catalog and creation routes, so that restricted epidemiological protocols and data are protected.",
+          "acceptanceCriteria": "Given an unauthenticated user,\nWhen they attempt to access the catalog or create a material,\nThen they are blocked and prompted to log in.\nGiven an authenticated user,\nWhen they attempt to access the catalog or create a material,\nThen they are granted access successfully.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "authentication route middleware",
+          "sixSigmaMetric": "reduce unauthenticated request penetration to protected routes from 100% to 0%",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    }
+  ]
+}
