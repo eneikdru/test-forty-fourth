@@ -1,0 +1,86 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "sixSigmaMetric": "reduce local full stack startup time from >10 mins to <1 min",
+      "tocConstraintRef": "local environment deployment",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add a docker-compose.yml at the repository root that starts the full stack and exposes a health-check endpoint"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add docker-compose.yml for full stack startup",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing the containerization for this epic, I want to create a docker-compose configuration, so that the full stack can be started with a single command.",
+          "acceptanceCriteria": "Given the repository without a docker-compose file,\nWhen I run docker-compose up,\nThen the full stack starts successfully and tests verify the health-check endpoint returns 200 OK.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "local deployment setup time",
+          "sixSigmaMetric": "reduce local environment startup time from >10 minutes to <1 minute",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "sixSigmaMetric": "reduce time to correct an outdated material from >1 hour to <1 minute",
+      "tocConstraintRef": "material update turnaround time",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Add update and delete capabilities to the existing epidemiological material management UI"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add update and delete actions to material management UI",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing the material management UI for this epic, I want to add update and delete actions to the existing frontend, so that materials can be maintained.",
+          "acceptanceCriteria": "Given an existing material in the UI,\nWhen the user clicks edit and submits changes, or clicks delete,\nThen the frontend sends a PUT or DELETE request to the API, and E2E tests verify the view updates.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "frontend UI actions for material mutation",
+          "sixSigmaMetric": "increase frontend update and delete API call test coverage from 0% to 100%",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "Authentication and Access Control",
+      "jtbd": "When accessing the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access or modification.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "reduce unauthorized access incidents from unknown to 0",
+      "tocConstraintRef": "system access control",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Enforce authentication and session management for catalog access and material creation"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Enforce authentication for catalog routes",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing access control for this epic, I want to patch existing backend routes and frontend guards to require authentication, so that restricted endpoints are protected.",
+          "acceptanceCriteria": "Given an unauthenticated user,\nWhen they attempt to access restricted catalog endpoints,\nThen they are blocked with a 401 response, and integration tests verify authenticated users are granted access.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "unauthenticated endpoint exposure",
+          "sixSigmaMetric": "increase authentication middleware test coverage on protected routes from 0% to 100%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    }
+  ]
+}
