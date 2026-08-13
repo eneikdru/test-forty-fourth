@@ -1,0 +1,94 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Reduce local environment provisioning time from >10 minutes to <1 minute",
+      "tocConstraintRef": "Local development setup bottleneck",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add a docker-compose.yml at the repository root that starts the full stack and exposes a health-check endpoint."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Create docker-compose configuration",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing the containerization setup for this epic, I want to provide a single docker-compose.yml file, so that the full stack can be launched locally for verification.",
+          "acceptanceCriteria": "Given the repository root, When running docker-compose up, Then the backend, frontend, and database services start successfully.\nGiven the running services, When querying the health-check endpoint, Then it returns a healthy status.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Environment start time",
+          "sixSigmaMetric": "Reduce container start failures from >5% to 0%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Reduce manual backend edits for material updates from >0 to 0",
+      "tocConstraintRef": "Incomplete frontend administration capabilities",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Add UI capability to update and delete an existing epidemiological material."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add update and delete actions to material UI",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing the UI patch for this epic, I want to add edit and delete actions to the material view, so that materials can be managed directly in the browser.",
+          "acceptanceCriteria": "Given an existing material in the system, When a user chooses to edit or delete it from the UI, Then the frontend invokes the corresponding PUT or DELETE API endpoint and the catalog is updated accordingly.\nGiven the API call completes, When the frontend receives the response, Then the updated state is immediately visible in the material view without a manual refresh.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Missing user actions in material interface",
+          "sixSigmaMetric": "Reduce frontend missing-action coverage gaps from 2 to 0",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "Authentication and Access Control",
+      "jtbd": "When accessing the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access or modification.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "Reduce unauthorized access incidents from >0 to 0",
+      "tocConstraintRef": "Unauthenticated access vulnerability",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Block unauthenticated access to the catalog and material creation and prompt for login."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Enforce authentication on protected resources",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing authentication checks for this epic, I want to secure the existing endpoints and routes, so that only authenticated users can access the knowledge base.",
+          "acceptanceCriteria": "Given an unauthenticated user, When they attempt to access the catalog or create a material, Then they are blocked and prompted to log in.\nGiven an authenticated user, When they attempt to access the same protected resources, Then they are permitted to proceed without being blocked.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Missing route and endpoint protection",
+          "sixSigmaMetric": "Increase unauthorized access block rate from 0% to 100%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    }
+  ]
+}
