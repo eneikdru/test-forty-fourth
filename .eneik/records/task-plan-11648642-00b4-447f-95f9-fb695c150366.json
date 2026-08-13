@@ -1,0 +1,88 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add a docker-compose.yml file at the repository root to start the full stack.",
+        "R2: Expose a health-check endpoint to verify real-world behavior and observability."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add docker-compose.yml for full stack",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing system containerization for this epic, I want to add a docker-compose configuration, so that the full stack can be started with a single command and observability can be verified.",
+          "acceptanceCriteria": "Given the repository root, When a developer runs docker-compose up, Then the full stack starts successfully.\nGiven the running stack, When the health-check endpoint is queried, Then it returns a success response.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Local development environment setup time",
+          "sixSigmaMetric": "Reduce local environment setup time from >10 mins to <1 min",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Implement UI actions to update existing epidemiological materials.",
+        "R2: Implement UI actions to delete existing epidemiological materials."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add update and delete actions to material UI",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing material management UI for this epic, I want to add update and delete functionality, so that the knowledge base accurately reflects the most current protocols.",
+          "acceptanceCriteria": "Given an existing material in the catalog, When a user chooses to edit it in the UI, Then the frontend invokes the corresponding PUT endpoint.\nGiven an existing material in the catalog, When a user chooses to delete it in the UI, Then the frontend invokes the corresponding DELETE endpoint.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Content management bottleneck in knowledge base",
+          "sixSigmaMetric": "Reduce material update cycle time from >10 mins to <1 min",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "Authentication and Authorization Mechanism",
+      "jtbd": "When accessing the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access or modification.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "Reduce unauthorized access incidents from unmeasured to 0",
+      "tocConstraintRef": "System access security vulnerability",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Implement an authentication mechanism to identify users.",
+        "R2: Block unauthenticated users from accessing the catalog or creating materials, prompting them to log in."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Enforce authentication for catalog access",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing access control for this epic, I want to enforce authentication checks, so that restricted epidemiological protocols and data are protected from unauthorized access.",
+          "acceptanceCriteria": "Given an unauthenticated user, When they attempt to access the catalog, Then they are blocked.\nGiven an unauthenticated user, When they attempt to create a material, Then they are prompted to log in.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Unauthorized data access risk",
+          "sixSigmaMetric": "Reduce unauthorized endpoint access from unmeasured to 0",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    }
+  ]
+}
