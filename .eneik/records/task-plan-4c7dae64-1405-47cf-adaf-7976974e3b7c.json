@@ -1,0 +1,98 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Reduce distinct entity missing-classification errors from 100% to 0%",
+      "tocConstraintRef": "Knowledge base semantic separation",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Implement distinct processing and validation for protocol-specific attributes like procedural steps",
+        "R2: Implement distinct processing and validation for epidemiological data attributes like sample metrics"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Patch Java services to validate protocols and raw data",
+          "roleTag": "BARCAN-TAG-02",
+          "jtbd": "When implementing distinct entities for this epic, I want to patch the existing backend code, so that protocols and data are processed with their specific structural attributes.",
+          "acceptanceCriteria": "Given an existing generic entity endpoint, When a user submits a protocol, Then the system validates and stores it as a protocol.\nGiven a user submits epidemiological data, When the payload contains sample metrics, Then the system validates and stores it as data.\nGiven these changes, When tests run, Then all distinct entity structures are verified to persist successfully.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Service layer entity processing logic",
+          "sixSigmaMetric": "Reduce distinct entity validation errors from 100% to 0%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "Material Revision History and Versioning",
+      "jtbd": "When an epidemiological protocol or material is updated, I want the system to track previous versions, so that I can audit changes and ensure clinical compliance.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "Increase the percentage of tracked material changes from 0% to 100%",
+      "tocConstraintRef": "Version tracking and auditability gap",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Track previous versions of protocols and materials upon update",
+        "R2: Provide retrieval of historical revisions with author and timestamp"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement version tracking in existing update endpoints",
+          "roleTag": "BARCAN-TAG-02",
+          "jtbd": "When implementing version history for this epic, I want to patch the existing backend save flow, so that older revisions are archived and queryable.",
+          "acceptanceCriteria": "Given an existing protocol is edited, When the save operation completes, Then the previous state is archived as a revision.\nGiven a client requests the history, When they query the detailed page, Then a list of historical revisions is returned.\nGiven these changes, When tests run, Then history tracking and retrieval are verified successfully.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Backend version archiving flow",
+          "sixSigmaMetric": "Reduce untracked revisions from 100% to 0%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Increase local deployment success rate to 100%",
+      "tocConstraintRef": "Local containerized launch process",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Fix launch or health check failure to ensure healthy runtime observation"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Patch runtime configuration to resolve launch failures",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing the runtime fix for this epic, I want to patch the broken deployment or boot sequence, so that the stack launches and passes health checks.",
+          "acceptanceCriteria": "Given a broken local environment, When the start command is executed, Then the stack successfully boots up.\nGiven a running stack, When the health endpoint is probed, Then it returns a healthy status.\nGiven these fixes, When tests run, Then system launch stability is verified successfully.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Local deployment startup sequence",
+          "sixSigmaMetric": "Increase successful local runtime launches from 0% to 100%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    }
+  ]
+}
