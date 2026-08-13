@@ -1,0 +1,86 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "sixSigmaMetric": "increase local stack successful startup rate from 0% to >99%",
+      "tocConstraintRef": "environment setup delay",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add a docker-compose.yml file starting the full stack and exposing a health-check endpoint"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add docker-compose for full stack deployment",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing the docker-compose setup for this epic, I want to configure the full stack containers and a health-check, so that the local environment verification is achievable with a single command.",
+          "acceptanceCriteria": "Given an unstarted environment, When running docker-compose up, Then the full stack starts successfully.\nGiven the stack is running, When calling the health-check endpoint, Then it returns a healthy status.\nGiven a local testing environment, When the integration tests run, Then they verify the stack starts and health-checks correctly.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "local stack startup time",
+          "sixSigmaMetric": "reduce local environment startup time from >10 mins to <1 min",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "sixSigmaMetric": "reduce time spent updating catalog materials from >5 mins to <1 min",
+      "tocConstraintRef": "catalog maintenance bottleneck",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Update existing UI to support editing and deleting epidemiological materials using existing API endpoints"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Patch existing UI to support material update and delete",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing the edit and delete functionality for this epic, I want to patch the existing UI components, so that users can manage the catalog without needing a new UI layer.",
+          "acceptanceCriteria": "Given an existing material in the catalog, When a user clicks edit and saves changes, Then the UI sends a PUT request updating the material.\nGiven an existing material, When a user clicks delete, Then the UI sends a DELETE request and removes it from the view.\nGiven the automated test suite, When E2E and unit tests run, Then the edit and delete flows pass successfully.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "catalog update cycle time",
+          "sixSigmaMetric": "reduce time to update or delete a material from >5 mins to <1 min",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "Authentication and Authorization Mechanism",
+      "jtbd": "When using the system, I want to confirm my identity, so that sensitive data remains secure from unapproved changes.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "reduce unauthorized data modification rate from >0% to 0%",
+      "tocConstraintRef": "system access control bottleneck",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Implement authentication to block unauthenticated users from accessing the catalog or creating materials"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Patch existing application with authentication mechanism",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing authentication for this epic, I want to enforce login requirements on existing code, so that unauthorized access to the knowledge base is blocked.",
+          "acceptanceCriteria": "Given an unauthenticated user, When they attempt to view the catalog, Then they are redirected to a login prompt.\nGiven an unauthenticated user, When they attempt to create a material, Then the action is blocked.\nGiven the QA test suite, When security integration tests run, Then all restricted endpoints reject unauthenticated requests.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "unauthorized access vulnerability",
+          "sixSigmaMetric": "reduce unauthorized access incident rate from 100% to 0%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    }
+  ]
+}
