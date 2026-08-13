@@ -1,0 +1,80 @@
+{
+    "epics": [
+        {
+            "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+            "sourceIndex": 0,
+            "requirements": [
+                "R1: The system must validate and store protocol-specific attributes when a user adds a protocol.",
+                "R2: The system must validate and store data-specific structures when a user uploads epidemiological data."
+            ],
+            "coverageComplete": true,
+            "slices": [
+                {
+                    "title": "Patch existing materials code to handle protocol and data attributes",
+                    "roleTag": "BARCAN-TAG-02",
+                    "jtbd": "When implementing the domain logic for this epic, I want to patch the existing backend code directly, so that protocols and data are validated with their specific attributes without creating new contracts.",
+                    "acceptanceCriteria": "Given a user wants to add a protocol, when they submit the details, then the system validates and stores protocol-specific attributes.\nGiven a user wants to upload epidemiological data, when they submit the data, then the system validates and stores data-specific structures.",
+                    "leanValue": "essential",
+                    "cynefinDomain": "clear",
+                    "tocConstraintRef": "backend API request latency for complex domain validations",
+                    "sixSigmaMetric": "reduce validation error rate for protocol submissions from >5% to <1%",
+                    "hasUi": false,
+                    "requirementRefs": [
+                        "R1",
+                        "R2"
+                    ]
+                }
+            ]
+        },
+        {
+            "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+            "sourceIndex": 1,
+            "requirements": [
+                "R1: The system must track previous versions and maintain a revision history when a protocol or material is updated.",
+                "R2: The system must allow users to view a list of historical revisions and the content of any past version on the detailed page."
+            ],
+            "coverageComplete": true,
+            "slices": [
+                {
+                    "title": "Patch existing code to track and serve revision history",
+                    "roleTag": "BARCAN-TAG-02",
+                    "jtbd": "When implementing versioning for this epic, I want to patch the existing code directly to track versions and return them, so that the revision history is maintained and accessible.",
+                    "acceptanceCriteria": "Given an existing protocol is edited and saved, when its detailed page is viewed, then a list of historical revisions is shown.\nGiven a specific past version in the history, when its content is requested, then the full content is returned and displayed.",
+                    "leanValue": "essential",
+                    "cynefinDomain": "clear",
+                    "tocConstraintRef": "database write contention during material updates",
+                    "sixSigmaMetric": "ensure 100% of material updates successfully record an immutable revision history entry",
+                    "hasUi": false,
+                    "requirementRefs": [
+                        "R1",
+                        "R2"
+                    ]
+                }
+            ]
+        },
+        {
+            "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+            "sourceIndex": 2,
+            "requirements": [
+                "R1: The product must launch successfully without runtime or health check failures."
+            ],
+            "coverageComplete": true,
+            "slices": [
+                {
+                    "title": "Diagnose and fix runtime health check failure",
+                    "roleTag": "BARCAN-TAG-05",
+                    "jtbd": "When repairing the product launch for this epic, I want to patch the runtime configuration or startup sequence directly, so that the system successfully passes its health check.",
+                    "acceptanceCriteria": "Given the application is configured to start, when the startup command is executed, then the process launches successfully without crashing.\nGiven the application is running, when the health check endpoint is polled, then it returns a healthy status.",
+                    "leanValue": "essential",
+                    "cynefinDomain": "clear",
+                    "tocConstraintRef": "application startup time blocking container readiness",
+                    "sixSigmaMetric": "increase health check pass rate on startup from 0% to 100%",
+                    "hasUi": false,
+                    "requirementRefs": [
+                        "R1"
+                    ]
+                }
+            ]
+        }
+    ]
+}
