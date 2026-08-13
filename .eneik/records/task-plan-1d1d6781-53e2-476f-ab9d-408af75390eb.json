@@ -1,0 +1,82 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add a docker-compose.yml at the repository root to start the full stack and expose a health-check endpoint."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add docker-compose.yml for full stack",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing containerization for this epic, I want to add a docker-compose.yml, so that the product can be launched locally with a single command.",
+          "acceptanceCriteria": "Given a clean checkout of the repository, When a developer runs docker-compose up, Then the full stack starts and a health-check endpoint is accessible.\nGiven the containerized stack is running, When E2E verification is performed, Then it confirms successful deployment.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Local environment setup time",
+          "sixSigmaMetric": "Reduce local setup time to under 5 minutes",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Update existing UI to support editing and deleting epidemiological materials."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement update and delete material UI",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing material management for this epic, I want to add edit and delete actions to the existing UI, so that outdated protocols can be modified or removed.",
+          "acceptanceCriteria": "Given an existing material in the UI, When a user clicks delete, Then the frontend invokes the DELETE API and removes it from view.\nGiven an existing material in the UI, When a user saves an edit, Then the frontend invokes the PUT API and updates the view.\nGiven the new actions, When integration tests run, Then they pass and verify the state updates.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Outdated knowledge base materials",
+          "sixSigmaMetric": "Reduce obsolete protocol retention time to zero after deletion",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "System Authentication and Authorization",
+      "jtbd": "When accessing the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access or modification.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "Decrease unauthorized access incidents to 0",
+      "tocConstraintRef": "System security compliance",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Implement standard authentication and session mechanism to protect the knowledge base."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add authentication mechanism and login prompt",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing authentication for this epic, I want to enforce session checks and prompt for login, so that unauthorized access is blocked.",
+          "acceptanceCriteria": "Given an unauthenticated user, When they attempt to access the catalog, Then they are blocked and prompted to log in.\nGiven an authenticated user, When they access the catalog, Then they are allowed to proceed.\nGiven the new authentication logic, When security tests are run, Then they confirm unauthorized requests are rejected.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Unauthenticated data access risk",
+          "sixSigmaMetric": "Ensure 100% of sensitive endpoint requests are authenticated",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    }
+  ]
+}
