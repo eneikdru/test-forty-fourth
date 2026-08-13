@@ -1,0 +1,94 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "title": "System Containerization and Deployment",
+      "jtbd": "When running the product locally, I want to start the full stack with a single command, so that I can verify its real-world behavior and observability.",
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": null,
+      "tocConstraintRef": null,
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add a docker-compose.yml at the repository root that starts the full stack and exposes a health-check endpoint."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add docker-compose.yml for full stack local deployment",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing containerization for this epic, I want to add a docker-compose configuration, so that the full stack can be launched locally with a single command.",
+          "acceptanceCriteria": "Given a clean repository environment, When the docker-compose up command is executed, Then the backend, frontend, and database start successfully and expose a health-check endpoint.\nGiven the containerized full stack is running, When the integration and E2E test suites are executed, Then they verify the operational state across all layers.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Local environment setup friction",
+          "sixSigmaMetric": "Reduce full stack local startup time from manual steps to under 2 minutes",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "title": "Epidemiological Material Cataloging and Management",
+      "jtbd": "When I manage the epidemiology knowledge base, I want to catalog and update materials, so that the information is structured and up to date.",
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": null,
+      "tocConstraintRef": null,
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Enable the existing UI to update and delete epidemiological materials by invoking the corresponding PUT or DELETE API endpoints."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Wire update and delete actions in the existing materials UI",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing material management for this epic, I want to connect the existing UI actions to the API, so that users can update and delete materials directly.",
+          "acceptanceCriteria": "Given an existing material in the catalog, When a user submits an update or delete action via the UI, Then the frontend invokes the correct PUT or DELETE API endpoint.\nGiven the frontend update and delete actions, When unit and E2E tests are executed, Then they verify the correct API payload submissions and subsequent UI state changes.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Material lifecycle management UI bottleneck",
+          "sixSigmaMetric": "Ensure 100% of edit/delete UI interactions result in correct API payload submissions",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "Knowledge Base Authentication and Authorization",
+      "jtbd": "When accessing the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access or modification.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "Reduce unauthorized access incidents to zero",
+      "tocConstraintRef": "Data security and access control compliance",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Block unauthenticated users from accessing the catalog or creating materials, prompting them to log in using the existing authentication mechanism."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Wire existing authentication mechanism to knowledge base endpoints",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing access control for this epic, I want to patch the existing code to enforce authentication, so that restricted data is protected without creating new schema or API layers.",
+          "acceptanceCriteria": "Given an unauthenticated user, When they attempt to access the catalog or create a material, Then they are blocked and redirected to the existing login mechanism.\nGiven the protected endpoints, When unit, integration, and E2E tests are executed, Then they verify that unauthorized access is rejected and authenticated access is permitted.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Endpoint security enforcement",
+          "sixSigmaMetric": "Achieve 100% test coverage for unauthorized access blocks on catalog endpoints",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    }
+  ]
+}
