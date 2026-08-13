@@ -1,0 +1,18 @@
+{
+  "gaps": [
+    {
+      "title": "Missing Distinct Schemas and Models for Protocols and Data",
+      "roleTag": "BARCAN-TAG-02",
+      "jtbd": "When cataloging the knowledge base, I want to manage protocols and raw data with their specific structural attributes, so that researchers can search and view them as distinct entity types rather than generic text materials.",
+      "acceptanceCriteria": "Given a user wants to add a protocol, when they submit the details, then the system validates and stores protocol-specific attributes (such as procedural steps and author approvals); given a user wants to upload epidemiological data, when they submit the data, then the system validates and stores data-specific structures (such as sample metrics and collection parameters).",
+      "reason": "The brief explicitly requests cataloging, searching, and managing three distinct kinds of entities: epidemiological 'materials' (материалы), 'protocols' (протоколы), and 'data' (данные). However, the database schema (V20260812160934550__full_text_search.sql) and the Java service/DTO layers only define and implement a single generic 'materials' entity with a flat title and content, completely omitting distinct representations or endpoints for protocols and raw epidemiological data."
+    },
+    {
+      "title": "Missing Versioning and Revision History for Protocols and Materials",
+      "roleTag": "BARCAN-TAG-02",
+      "jtbd": "When an epidemiological protocol or material description is updated, I want the system to track previous versions and maintain a revision history, so that I can audit changes and revert to older versions to ensure clinical compliance and procedural safety.",
+      "acceptanceCriteria": "Given an existing protocol is edited and saved, when I view its detailed page, then I can see a list of historical revisions showing who changed what and when, with the ability to view the content of any past version.",
+      "reason": "In any professional scientific/clinical knowledge base (база знаний) representing protocols and standards, version control and change tracking are critical domain-standard requirements to prevent unauthorized or undocumented changes to high-risk laboratory procedures. The frontend mockups include a 'History' navigation item, but neither the backend database schema nor the API endpoints support tracking, storing, or retrieving historical revisions of the materials/protocols."
+    }
+  ]
+}
