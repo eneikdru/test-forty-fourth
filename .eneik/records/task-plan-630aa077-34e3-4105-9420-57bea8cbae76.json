@@ -1,0 +1,92 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "sixSigmaMetric": "Reduce local setup time to under 5 minutes",
+      "tocConstraintRef": "Local deployment verification bottleneck",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add a docker-compose.yml or equivalent to start the full stack",
+        "R2: Expose a health-check endpoint for verification"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add docker-compose for full stack and health-check",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing containerization for this epic, I want to add a docker-compose setup, so that the product can be launched and verified for real.",
+          "acceptanceCriteria": "Given a delivered project with no containerization\nWhen I run the docker-compose command at the repository root\nThen the full stack starts successfully and exposes a health-check endpoint\nAnd E2E tests verify the health-check endpoint responds correctly",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Local deployment setup",
+          "sixSigmaMetric": "Achieve 100% success rate for local startup via docker-compose",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "sixSigmaMetric": "Reduce time spent updating or deleting materials by 50%",
+      "tocConstraintRef": "Material management UI bottleneck",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Add UI for updating materials",
+        "R2: Add UI for deleting materials"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add UI for updating and deleting materials",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing UI for this epic, I want to add edit and delete capabilities, so that the knowledge base accurately reflects current protocols.",
+          "acceptanceCriteria": "Given an existing material in the knowledge base\nWhen a user chooses to edit or delete it from the UI\nThen the frontend invokes the corresponding PUT or DELETE API endpoint\nAnd E2E tests verify the full update and delete user journey",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Material management UI",
+          "sixSigmaMetric": "Achieve 100% success rate on UI update and delete operations",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "System Authentication and Authorization",
+      "jtbd": "When accessing the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access or modification.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "Reduce unauthorized access incidents to zero",
+      "tocConstraintRef": "System security and data protection bottleneck",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Block unauthenticated users from accessing the catalog or creating a material",
+        "R2: Prompt unauthenticated users to log in"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement authentication checks and login prompt",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing authentication for this epic, I want to enforce access control, so that unauthorized access is blocked and users are prompted to log in.",
+          "acceptanceCriteria": "Given an unauthenticated user\nWhen they attempt to access the catalog or create a material\nThen they are blocked from access and prompted to log in\nAnd E2E tests verify that unauthenticated access is reliably blocked",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "System security",
+          "sixSigmaMetric": "Achieve 100% blocked unauthenticated attempts",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    }
+  ]
+}
