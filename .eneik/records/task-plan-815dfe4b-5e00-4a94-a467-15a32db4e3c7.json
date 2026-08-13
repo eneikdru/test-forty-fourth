@@ -1,0 +1,98 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": null,
+      "tocConstraintRef": null,
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Validate and store protocol-specific procedural steps and author approvals",
+        "R2: Validate and store epidemiological data sample metrics and collection parameters"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Patch generic materials entity to support protocol and data attributes",
+          "roleTag": "BARCAN-TAG-02",
+          "jtbd": "When implementing distinct entities support for this epic, I want to patch the existing generic material schema and endpoints, so that protocol and data attributes are properly managed without adding new layers.",
+          "acceptanceCriteria": "Given a user submits a protocol, When the details are processed, Then the patched entity correctly validates and stores procedural steps and author approvals.\nGiven a user uploads epidemiological data, When the data is processed, Then the patched entity correctly validates and stores sample metrics and collection parameters, with all flows verified by unit and E2E tests.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Database schema parsing and validation logic",
+          "sixSigmaMetric": "Reduce distinct entity ingestion failure rate from 100% to <1%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "Material and Protocol Revision History",
+      "jtbd": "When an epidemiological protocol or material description is updated, I want the system to track previous versions and maintain a revision history, so that I can audit changes and revert to older versions to ensure clinical compliance and procedural safety.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "Increase revision tracking coverage from 0% to 100% of material updates",
+      "tocConstraintRef": "Audit compliance and historical data retrieval time",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Track and store historical versions when protocols or materials are updated",
+        "R2: Allow retrieval of historical revisions and their content from the API"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Patch existing update endpoints to record and retrieve revision history",
+          "roleTag": "BARCAN-TAG-02",
+          "jtbd": "When implementing revision history for this epic, I want to patch the existing backend service and endpoints, so that previous versions of materials are stored and retrievable without creating new schema layers.",
+          "acceptanceCriteria": "Given a protocol or material is updated, When the save operation completes, Then the old version is archived into the revision history.\nGiven a client requests a material's history, When the endpoint is called, Then the list of past revisions and their contents is returned, with all changes verified by automated integration tests.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Revision storage efficiency and query execution time",
+          "sixSigmaMetric": "Reduce revision retrieval failure rate from 100% to 0%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": null,
+      "tocConstraintRef": null,
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Fix runtime launch failure and ensure health checks pass to restore system observability"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Fix runtime deployment and health check failures",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing the runtime fix for this epic, I want to resolve the launch and health check errors, so that the product successfully starts and can be observed locally.",
+          "acceptanceCriteria": "Given the application stack is triggered to start, When the containerization script runs, Then the system boots successfully without fatal errors.\nGiven the application is running, When the health check endpoint is probed, Then it returns a healthy response, confirmed by CI startup tests.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Local deployment startup sequence",
+          "sixSigmaMetric": "Decrease local runtime launch failure rate from 100% to 0%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    }
+  ]
+}
