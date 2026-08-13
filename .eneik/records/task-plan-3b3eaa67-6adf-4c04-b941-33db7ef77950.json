@@ -1,0 +1,92 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "sixSigmaMetric": "Reduce local deployment setup time from >30 mins to <1 min",
+      "tocConstraintRef": "Local deployment verification bottleneck",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add a docker-compose.yml file at the repository root to start the full stack.",
+        "R2: Expose a health-check endpoint to verify the product can be launched."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Create docker-compose configuration and health-check",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing the container deployment for this epic, I want to add a docker-compose configuration and health-check, so that the full stack can be launched and verified locally.",
+          "acceptanceCriteria": "Given the repository root, When I run docker-compose up, Then the full stack starts successfully.\nGiven the running stack, When I access the health-check endpoint, Then it returns a healthy status.\nGiven the QA pipeline, When deployment tests execute, Then the container health checks pass without failure.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Local environment setup bottleneck",
+          "sixSigmaMetric": "Reduce manual environment configuration errors from >10% to 0%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "sixSigmaMetric": "Reduce outdated materials in catalog from >10% to 0%",
+      "tocConstraintRef": "Material catalog freshness bottleneck",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Implement UI functionality to update existing epidemiological materials.",
+        "R2: Implement UI functionality to delete existing epidemiological materials."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement UI for updating and deleting materials",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing the catalog UI for this epic, I want to add update and delete actions, so that the knowledge base accurately reflects the most current protocols without outdated entries.",
+          "acceptanceCriteria": "Given an existing material in the catalog, When a user submits an update, Then the UI sends a PUT request and updates the view.\nGiven an existing material in the catalog, When a user clicks delete, Then the UI sends a DELETE request and removes it.\nGiven the QA test suite, When E2E UI tests run for update and delete flows, Then all assertions pass successfully.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Outdated material removal bottleneck",
+          "sixSigmaMetric": "Reduce material update/delete turnaround from >10 mins to <1 min",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "Authentication and Authorization Mechanism",
+      "jtbd": "When accessing the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access or modification.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "Reduce unauthorized access incidents from >0 to 0",
+      "tocConstraintRef": "Unrestricted access vulnerability bottleneck",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Block unauthenticated users from accessing the knowledge base catalog.",
+        "R2: Prompt unauthenticated users to log in when attempting to create a material."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement authentication and session mechanism",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing authentication for this epic, I want to enforce session checks, so that restricted epidemiological protocols are protected from unauthorized access.",
+          "acceptanceCriteria": "Given an unauthenticated user, When they attempt to access the catalog, Then they are blocked from viewing restricted data.\nGiven an unauthenticated user, When they attempt to create a material, Then they are prompted to log in to the system.\nGiven the automated QA suite, When unauthenticated access attempts are simulated, Then the security assertions pass successfully.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Unauthenticated access bottleneck",
+          "sixSigmaMetric": "Reduce unauthenticated request success rate from 100% to 0%",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    }
+  ]
+}
