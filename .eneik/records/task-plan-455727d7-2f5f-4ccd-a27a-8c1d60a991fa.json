@@ -1,0 +1,86 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Extend the existing generic materials entity and endpoints to validate and store protocol-specific attributes (e.g., procedural steps, approvals).",
+        "R2: Extend the existing generic materials entity and endpoints to validate and store raw data-specific structures (e.g., sample metrics, collection parameters)."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Patch generic materials entity to support protocol and data attributes",
+          "roleTag": "BARCAN-TAG-02",
+          "jtbd": "When implementing attribute support for this epic, I want to extend the generic materials code, so that protocols and data retain their specific structures without needing a new data model.",
+          "acceptanceCriteria": "Given a user adds a protocol, When submitted, Then the system validates and stores procedural steps in existing structures.\nGiven a user uploads data, When submitted, Then the system validates and stores sample metrics in existing structures.\nGiven the patched code is tested, When unit and integration tests run, Then they verify the generic materials entity correctly handles protocol and data specific attributes.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Data Model Flexibility",
+          "sixSigmaMetric": "Reduce missing protocol/data attribute errors to 0",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Track previous versions and maintain a revision history when an epidemiological protocol or material description is updated.",
+        "R2: Expose the revision history to allow users to view who changed what and when, and retrieve the content of past versions."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Patch materials code to track and retrieve revisions",
+          "roleTag": "BARCAN-TAG-02",
+          "jtbd": "When implementing versioning for this epic, I want to patch the existing materials code to save past revisions, so that the revision history can be audited.",
+          "acceptanceCriteria": "Given a material is edited, When saved, Then the system tracks the previous version and maintains revision history.\nGiven a user views the material history, When requested, Then the system returns the list of historical revisions and their content.\nGiven the patched code is tested, When unit and integration tests run, Then they verify the material history is correctly tracked and retrieved.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Auditability",
+          "sixSigmaMetric": "Achieve 100% tracking of material edits",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "System Runtime Stabilization",
+      "jtbd": "When the product is deployed, I want the system to launch successfully and pass its health check, so that users can access the system and we can gather real evidence.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "Increase runtime health check pass rate to 100%",
+      "tocConstraintRef": "System Startup Reliability",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Fix the underlying issue causing the launch failure or health check failure to restore healthy runtime observation."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Fix runtime health check failure",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing the runtime fix for this epic, I want to patch the startup or health check configuration, so that the system launches successfully and passes health checks.",
+          "acceptanceCriteria": "Given the system is launched, When the startup sequence executes, Then the application starts without crashing.\nGiven the application is running, When the health check is polled, Then it returns a healthy status.\nGiven the patched runtime configuration is tested, When E2E tests run, Then they pass successfully.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "System Boot Sequence",
+          "sixSigmaMetric": "Reduce startup crash rate to 0",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    }
+  ]
+}
