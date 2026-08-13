@@ -1,0 +1,88 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add a docker-compose.yml file at the repository root.",
+        "R2: Expose a health-check endpoint for the full stack."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add docker-compose.yml with health-check",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing containerization for this epic, I want to add a docker-compose.yml, so that the full stack can be started and verified locally.",
+          "acceptanceCriteria": "Given the repository root, When I run docker-compose up, Then the full stack starts successfully.\nGiven the running stack, When I ping the health-check endpoint, Then it returns a success status.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Local setup pipeline",
+          "sixSigmaMetric": "Reduce local setup time from >10 mins to <1 min",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Invoke PUT API endpoint from existing UI to update materials.",
+        "R2: Invoke DELETE API endpoint from existing UI to delete materials."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Patch UI to invoke update and delete endpoints",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing the catalog UI patch for this epic, I want to wire existing buttons to PUT and DELETE endpoints, so that users can manage materials.",
+          "acceptanceCriteria": "Given an existing material, When a user updates it via UI, Then the frontend invokes the PUT endpoint.\nGiven an existing material, When a user deletes it via UI, Then the frontend invokes the DELETE endpoint.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Frontend API integration",
+          "sixSigmaMetric": "Reduce manual data correction time from >5 mins to <1 min",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "Authentication and Authorization Mechanism",
+      "jtbd": "When accessing the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access or modification.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "Reduce unauthorized access incidents from >0 to 0",
+      "tocConstraintRef": "Data security compliance",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Block unauthenticated users from accessing the catalog.",
+        "R2: Prompt unauthenticated users to log in."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Patch existing code with authentication enforcement",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing the authentication mechanism for this epic, I want to patch the existing access paths, so that unauthenticated access is blocked.",
+          "acceptanceCriteria": "Given an unauthenticated user, When they attempt to access the catalog, Then they are blocked.\nGiven an unauthenticated user, When they are blocked, Then they are prompted to log in.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Access control enforcement",
+          "sixSigmaMetric": "Increase authenticated request ratio from <100% to 100%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    }
+  ]
+}
