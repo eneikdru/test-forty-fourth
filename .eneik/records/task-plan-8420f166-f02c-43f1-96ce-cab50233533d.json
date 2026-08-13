@@ -1,0 +1,88 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add docker-compose.yml at the repository root to start the full stack",
+        "R2: Expose a health-check endpoint for launch verification"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add docker-compose and health check",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing the containerization for this epic, I want to create a docker-compose file and health check, so that the stack can be run and verified locally",
+          "acceptanceCriteria": "Given a clone of the repository, When I run docker-compose up, Then the full stack starts successfully.\nGiven the stack is running, When I ping the health-check endpoint, Then it returns a healthy status.\nGiven a local test environment, When running the integration tests, Then the docker-compose setup is verified to start properly.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Local environment setup time",
+          "sixSigmaMetric": "Reduce local setup time to under 5 minutes",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Add UI controls to update existing materials",
+        "R2: Add UI controls to delete existing materials"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add update and delete UI for materials",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing the update and delete UI for this epic, I want to add edit and delete actions, so that materials can be managed without outdated entries",
+          "acceptanceCriteria": "Given an existing material, When the user clicks edit and saves changes, Then the frontend invokes the PUT API and updates the view.\nGiven an existing material, When the user clicks delete, Then the frontend invokes the DELETE API and removes it from the view.\nGiven the frontend test suite, When running E2E and component tests, Then the update and delete UI interactions are verified to function correctly.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Material management cycle time",
+          "sixSigmaMetric": "Reduce time to update or delete a material to under 30 seconds",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "Authentication and Authorization Mechanism",
+      "jtbd": "When accessing the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access or modification.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "Reduce unauthorized access incidents to 0",
+      "tocConstraintRef": "Data security compliance",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Block unauthenticated access to the catalog and material creation",
+        "R2: Prompt unauthenticated users to log in"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement authentication blocks and login prompts",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing access control for this epic, I want to block unauthenticated access and show a login prompt, so that only authorized users can manage the catalog",
+          "acceptanceCriteria": "Given an unauthenticated user, When they attempt to access the catalog, Then they are blocked.\nGiven an unauthenticated user, When they are blocked, Then they are prompted to log in.\nGiven the security test suite, When running integration and E2E tests, Then unauthenticated access attempts are proven to be rejected.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Unauthorized access surface",
+          "sixSigmaMetric": "Achieve 100% block rate for unauthenticated material creation attempts",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    }
+  ]
+}
