@@ -1,0 +1,86 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "sixSigmaMetric": "Reduce system local deployment setup time from >10 minutes to <1 minute",
+      "tocConstraintRef": "local_environment_bottleneck",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add a docker-compose.yml at the repository root to start the full stack and expose a health-check endpoint"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add docker-compose.yml for full stack containerization",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing containerization for this epic, I want to create a docker-compose.yml file, so that the full stack can be started with a single command for real-world observability.",
+          "acceptanceCriteria": "Given a delivered project without containerization, When the docker-compose up command is executed, Then the full stack starts and exposes a health-check endpoint.\nGiven the running stack, When integration tests ping the health-check endpoint, Then they assert a successful operational status.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "local_verification_bottleneck",
+          "sixSigmaMetric": "Decrease time to verify real-world behavior locally to <1 minute",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "sixSigmaMetric": "Decrease manual material management interventions to 0",
+      "tocConstraintRef": "material_update_bottleneck",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Patch frontend UI to allow updating and deleting existing epidemiological materials by invoking the respective PUT and DELETE API endpoints"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Patch frontend UI for material update and delete",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing the update and delete UI for this epic, I want to patch the frontend actions, so that materials can be managed and updated without leaving outdated entries.",
+          "acceptanceCriteria": "Given an existing material in the catalog, When a user selects to edit or delete it via the UI, Then the frontend invokes the corresponding PUT or DELETE API endpoint and updates the view.\nGiven the new update and delete UI actions, When frontend E2E tests simulate material editing and deletion, Then they confirm the UI invokes the correct endpoints and reflects the new state.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "material_lifecycle_management_bottleneck",
+          "sixSigmaMetric": "Reduce manual material update and delete processing time to 0",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "sixSigmaMetric": "Reduce unauthorized access incidents to 0",
+      "tocConstraintRef": "access_control_bottleneck",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Patch existing knowledge base access logic to prompt unauthenticated users to log in when attempting to access the catalog or create a material"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Patch authentication mechanism for knowledge base",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing the auth system for this epic, I want to add an interceptor that validates credentials, so that any unauthenticated access to the catalog is immediately blocked.",
+          "acceptanceCriteria": "Given an unauthenticated user, When they attempt to access the catalog or create a material, Then they are blocked from the action and prompted to log in.\nGiven an unauthenticated user attempt, When tests verify the catalog and creation routes, Then they assert a 401 or 403 response is returned and access is blocked.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "unauthenticated_access_vulnerability",
+          "sixSigmaMetric": "Increase blocked unauthorized requests to 100%",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ],
+      "title": "Authentication and Authorization",
+      "jtbd": "When navigating the epidemiology knowledge base, I want my session to be securely verified, so that sensitive materials are shielded from non-authenticated users.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear"
+    }
+  ]
+}
