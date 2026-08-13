@@ -1,0 +1,96 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Reduce full stack launch and verification time from >15 mins to <1 min",
+      "tocConstraintRef": "Local environment setup bottleneck",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add a docker-compose.yml at the repository root that starts the full stack and exposes a health-check endpoint"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add docker-compose for full stack execution",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing the docker-compose setup for this epic, I want to add a docker-compose.yml file exposing a health check, so that the product can be verified as a running stack locally.",
+          "acceptanceCriteria": "Given a repository without a docker-compose file, When a developer runs docker-compose up, Then the full stack starts successfully.\nGiven the stack is running, When the automated test pings the health-check, Then it verifies the 200 OK response.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Docker configuration absence",
+          "sixSigmaMetric": "Reduce docker-compose up time from >10 mins to <1 min",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Reduce outdated material presence time in catalog from >1 day to <1 hour",
+      "tocConstraintRef": "Catalog update turnaround bottleneck",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Add UI controls and logic to update existing materials via the existing PUT API",
+        "R2: Add UI controls and logic to delete existing materials via the existing DELETE API"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Wire frontend UI for updating and deleting materials",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing the material update and delete UI for this epic, I want to wire existing PUT and DELETE endpoints to the frontend, so that the knowledge base accurately reflects the most current protocols.",
+          "acceptanceCriteria": "Given an existing material, When a user updates or deletes it via the UI, Then the frontend invokes the corresponding API.\nGiven the new UI elements are implemented, When the frontend E2E test suite runs, Then it successfully simulates user clicks for update and delete.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Frontend missing update/delete controls",
+          "sixSigmaMetric": "Reduce manual material deletion/update operation time from >5 mins to <30 secs",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "Authentication and Authorization",
+      "jtbd": "When accessing the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access or modification.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "Decrease unauthorized access incidents to protected protocols from current baseline to 0",
+      "tocConstraintRef": "Data security compliance bottleneck",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Block unauthenticated access to the catalog and material creation endpoints, prompting to log in"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Enforce authentication on protected resources",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing authentication for this epic, I want to block unauthenticated access to the catalog and prompt login, so that restricted data is protected from unauthorized access.",
+          "acceptanceCriteria": "Given an unauthenticated user, When they attempt to access restricted routes, Then they are blocked and prompted to log in.\nGiven the access controls are implemented, When the integration test suite runs without credentials, Then it verifies a 401 or 403 response on all protected endpoints.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Unprotected REST endpoints",
+          "sixSigmaMetric": "Decrease unauthorized API requests that bypass security from >0% to 0%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    }
+  ]
+}
