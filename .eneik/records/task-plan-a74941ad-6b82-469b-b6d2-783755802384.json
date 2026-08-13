@@ -1,0 +1,96 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": null,
+      "tocConstraintRef": null,
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add distinct structural attributes and validation for protocols.",
+        "R2: Add distinct structural attributes and validation for raw epidemiological data."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement structural attributes for protocols and data",
+          "roleTag": "BARCAN-TAG-02",
+          "jtbd": "When implementing specific entity types for this epic, I want to extend the existing materials entity to support distinct structures for protocols and raw data, so that researchers can search and view them accurately.",
+          "acceptanceCriteria": "Given a user wants to add a protocol, when they submit the details, then the system validates and stores protocol-specific attributes.\nGiven a user wants to upload epidemiological data, when they submit the data, then the system validates and stores data-specific structures.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Generic schema limitation for materials",
+          "sixSigmaMetric": "Decrease the rate of missing domain-specific attributes for protocols and data from 100% to 0%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "Revision History for Materials and Protocols",
+      "jtbd": "When an epidemiological protocol or material description is updated, I want the system to track previous versions and maintain a revision history, so that I can audit changes and revert to older versions to ensure clinical compliance and procedural safety.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "Increase the percentage of documented and auditable protocol changes from 0% to 100%",
+      "tocConstraintRef": "Compliance audit trail bottleneck",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Implement version control and tracking for epidemiological protocols and materials."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add versioning to materials API",
+          "roleTag": "BARCAN-TAG-02",
+          "jtbd": "When implementing versioning for this epic, I want to add revision tracking to existing material endpoints and services, so that historical versions are preserved and retrievable.",
+          "acceptanceCriteria": "Given an existing protocol is edited and saved, when the backend processes the update, then it stores a historical revision including author and timestamp.\nGiven a request to view a protocol's history, when the client calls the endpoint, then the API returns a list of past versions.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Lack of backend version storage",
+          "sixSigmaMetric": "Reduce the number of untracked high-risk protocol modifications from 100% to 0%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": null,
+      "tocConstraintRef": null,
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Fix the application launch failure and ensure health checks pass."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Fix local environment launch and health check",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing the launch fix for this epic, I want to resolve the container/startup errors, so that the application successfully boots and passes health checks.",
+          "acceptanceCriteria": "Given the application is in a failed startup state, when I apply the launch fixes and start the environment, then the product successfully boots.\nGiven the application has started, when the health check endpoint is probed, then it returns a healthy status.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "System startup bottleneck",
+          "sixSigmaMetric": "Reduce application startup failure rate from 100% to 0%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    }
+  ]
+}
