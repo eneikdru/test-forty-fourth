@@ -1,0 +1,94 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Reduce local environment setup time from >10 mins to <1 min",
+      "tocConstraintRef": "Local development environment setup bottleneck",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add a docker-compose.yml file at the repository root that starts the full stack and exposes a health-check endpoint."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add Docker Compose for full stack",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing the containerization for this epic, I want to add a docker-compose.yml file, so that the full stack can be launched locally and observability is improved.",
+          "acceptanceCriteria": "Given the repository without container orchestration,\nWhen a developer runs docker-compose up,\nThen the backend, frontend, and database start successfully and expose a health-check endpoint.\nGiven the running stack,\nWhen calling the health-check endpoint,\nThen it returns a 200 OK status.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Container orchestration absence",
+          "sixSigmaMetric": "Reduce number of manual startup commands from >3 to 1",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Reduce manual database updates from >5 per week to 0",
+      "tocConstraintRef": "Material update user interface bottleneck",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Implement UI for updating and deleting existing epidemiological materials."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Patch Material UI with Update and Delete",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing material management UI for this epic, I want to add update and delete actions, so that materials can be maintained directly from the interface.",
+          "acceptanceCriteria": "Given an existing material in the catalog,\nWhen a user clicks the edit button and saves changes,\nThen the frontend invokes the PUT API endpoint and updates the view.\nGiven an existing material,\nWhen a user clicks the delete button and confirms,\nThen the frontend invokes the DELETE API endpoint and removes it from the view.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Frontend material lifecycle management",
+          "sixSigmaMetric": "Reduce frontend unhandled CRUD actions from >2 to 0",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "Authentication and Authorization Mechanism",
+      "jtbd": "When accessing the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access or modification.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "Reduce unauthorized access incidents from >0 to 0",
+      "tocConstraintRef": "System access control bottleneck",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Introduce a standard authentication and session mechanism to block unauthenticated access to the catalog and material creation."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Patch Existing Code with Authentication",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing authentication for this epic, I want to add a login flow and session protection, so that sensitive data access is restricted.",
+          "acceptanceCriteria": "Given an unauthenticated user,\nWhen they attempt to access the catalog or create a material,\nThen they are blocked and prompted to log in.\nGiven a user providing valid credentials,\nWhen they log in,\nThen a session is established and access to the catalog is granted.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Security session enforcement",
+          "sixSigmaMetric": "Reduce unauthenticated route access success rate from 100% to 0%",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    }
+  ]
+}
