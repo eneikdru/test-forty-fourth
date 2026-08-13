@@ -1,0 +1,86 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "sixSigmaMetric": "Decrease developer onboarding time from hours to under 10 minutes",
+      "tocConstraintRef": "Developer onboarding and local testing execution bottleneck",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add a docker-compose.yml at the repository root that starts the full stack and exposes a health-check endpoint"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add docker-compose.yml for full stack startup",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing the containerization for this epic, I want to add a docker-compose.yml file, so that the full stack can be started with a single command.",
+          "acceptanceCriteria": "Given the repository root lacks containerization, When the docker-compose.yml is executed, Then it starts the full stack services.\nGiven the stack is running, When the health check endpoint is queried, Then it returns a success status.\nGiven a suite of integration tests, When run against the local containerized stack, Then all tests pass to verify observability.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Local environment reproducibility constraint",
+          "sixSigmaMetric": "Achieve 100% success rate for single-command full stack startup",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "sixSigmaMetric": "Decrease time to update outdated materials by 50%",
+      "tocConstraintRef": "Content management bottleneck",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Implement UI integration for updating and deleting existing epidemiological materials"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add update and delete actions to materials UI",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing the management UI for this epic, I want to wire update and delete actions to the existing API, so that materials can be modified or removed by users.",
+          "acceptanceCriteria": "Given an existing material in the catalog, When a user chooses to edit it via the UI, Then the frontend invokes the PUT API endpoint and updates the view.\nGiven an existing material, When a user chooses to delete it, Then the frontend invokes the DELETE API endpoint and removes it from the catalog.\nGiven the need for verification, When the E2E tests are executed for update and delete flows, Then they pass successfully.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Material update turnaround time",
+          "sixSigmaMetric": "Achieve 100% UI to API binding coverage for update and delete actions",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "Authentication and Authorization Mechanism",
+      "jtbd": "When accessing the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access or modification.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "Eliminate unauthorized access incidents to zero",
+      "tocConstraintRef": "Security enforcement gap",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Implement authentication mechanism to block unauthenticated access to the catalog and prompt login"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Enforce authentication for catalog access",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing access control for this epic, I want to enforce user sessions on existing endpoints, so that unauthorized users cannot access or modify materials.",
+          "acceptanceCriteria": "Given an unauthenticated user, When they attempt to access the catalog, Then they are blocked and prompted to log in.\nGiven an authenticated user, When they attempt to create a material, Then the action is permitted and recorded.\nGiven the security boundaries, When authentication integration tests are run, Then unauthorized access attempts are correctly rejected.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Access control vulnerability",
+          "sixSigmaMetric": "Achieve 100% rejection rate for unauthenticated modification attempts in API tests",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    }
+  ]
+}
