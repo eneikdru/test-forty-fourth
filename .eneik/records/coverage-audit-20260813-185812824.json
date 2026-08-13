@@ -1,0 +1,18 @@
+{
+  "gaps": [
+    {
+      "title": "Missing Frontend Edit and Delete (Management)",
+      "roleTag": "BARCAN-TAG-02",
+      "jtbd": "When a protocol needs updates or removal, I want to edit or delete it via the UI, so that I can manage epidemiological materials as requested.",
+      "acceptanceCriteria": "Given a logged-in user viewing a material, When they click Edit or Delete, Then the material is updated or removed from the system.",
+      "reason": "The original brief explicitly asks for 'управления' (managing). While the backend has update/delete endpoints, the frontend currently lacks any UI to edit or delete materials."
+    },
+    {
+      "title": "Missing Authentication System",
+      "roleTag": "BARCAN-TAG-02",
+      "jtbd": "When accessing the system, I want to authenticate, so that sensitive epidemiological protocols and data are protected.",
+      "acceptanceCriteria": "Given an unauthenticated user, When they attempt to access the system, Then they are prompted to log in.",
+      "reason": "Domain-standard expectation: A knowledge base managing epidemiological materials and protocols requires authentication, especially since the UI already marks documents as 'Security Classification: Restricted'."
+    }
+  ]
+}
