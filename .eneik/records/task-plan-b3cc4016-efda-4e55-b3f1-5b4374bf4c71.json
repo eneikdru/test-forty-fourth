@@ -1,0 +1,100 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Reduce full stack local startup time from >10 mins to <1 min",
+      "tocConstraintRef": "Local verification bottleneck",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add a docker-compose.yml at the repository root that starts the full stack.",
+        "R2: Expose a health-check endpoint to verify the running product."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement Docker Compose Stack with Health Check",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing the container stack for this epic, I want to create a docker-compose file that starts the full stack and exposes a health check, so that the product can be launched and verified in a real environment.",
+          "acceptanceCriteria": "Given the project without containerization,\nWhen I run docker-compose up,\nThen the full stack starts successfully and exposes a health-check endpoint, and all required tests verify the stack starts correctly.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Local setup dependency",
+          "sixSigmaMetric": "Reduce container initialization failures from >0 to 0",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Increase material catalog accuracy by reducing outdated entries from >5% to 0%",
+      "tocConstraintRef": "Material lifecycle management limitation",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Implement UI functionality to invoke the PUT API endpoint for updating existing epidemiological materials.",
+        "R2: Implement UI functionality to invoke the DELETE API endpoint for deleting existing epidemiological materials."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement Material Update and Delete UI",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing the material update and delete UI for this epic, I want to add edit and delete actions, so that the frontend can successfully invoke the respective API endpoints.",
+          "acceptanceCriteria": "Given an existing material in the system,\nWhen a user chooses to edit or delete it from the UI,\nThen the frontend invokes the corresponding PUT or DELETE API endpoint and the catalog is updated accordingly, and tests verify the API invocations.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Frontend material mutation bottleneck",
+          "sixSigmaMetric": "Reduce manual material update requests from >10 per week to 0",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "System Authentication and Authorization",
+      "jtbd": "When accessing the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access or modification.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "Decrease unauthorized access incidents from unknown to 0",
+      "tocConstraintRef": "System security and data protection bottleneck",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Implement an authentication mechanism blocking unauthenticated users from accessing the catalog.",
+        "R2: Implement authorization to prompt unauthenticated users to log in when attempting to create a material."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement Access Control and Authentication Prompt",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing access control for this epic, I want to enforce authentication checks on catalog access and material creation, so that unauthorized actions are prevented and users are prompted to log in.",
+          "acceptanceCriteria": "Given an unauthenticated user,\nWhen they attempt to access the catalog or create a material,\nThen they are blocked and prompted to log in, and security tests verify unauthorized access is denied.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Unauthorized access path",
+          "sixSigmaMetric": "Reduce unauthorized resource access attempts from >0 to 0",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    }
+  ]
+}
