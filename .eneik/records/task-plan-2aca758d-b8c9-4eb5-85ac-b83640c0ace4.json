@@ -1,0 +1,96 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "reduce local environment deployment time from >10 mins to <1 min",
+      "tocConstraintRef": "local environment deployment constraint",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add a docker-compose.yml or equivalent to start the full stack and expose a health-check endpoint."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement local containerization stack",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing docker-compose for this epic, I want to add a docker-compose.yml file, so that the full stack can be started with a single command.",
+          "acceptanceCriteria": "Given the repository root\nWhen a developer runs the container start command\nThen the full stack boots successfully\nAnd E2E tests verify the health-check endpoint responds with 200 OK",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "local dev boot bottleneck",
+          "sixSigmaMetric": "increase single-command boot success rate from 0% to 100%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "reduce time to correct outdated materials from >5 mins to <1 min via UI",
+      "tocConstraintRef": "material updating bottleneck",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Implement capability to update existing materials.",
+        "R2: Implement capability to delete existing materials."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement material update and delete in frontend",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing the frontend changes for this epic, I want to add edit and delete actions, so that materials can be updated and deleted.",
+          "acceptanceCriteria": "Given an existing material in the catalog\nWhen a user chooses to edit or delete it from the UI\nThen the frontend invokes the corresponding API endpoint and updates the view\nAnd frontend integration tests verify the state update",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "frontend material maintenance constraint",
+          "sixSigmaMetric": "increase CRUD frontend component test coverage from 50% to 100%",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "System Authentication and Authorization",
+      "jtbd": "When accessing the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access or modification.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "reduce unauthorized access incidents from >0 to 0 per week",
+      "tocConstraintRef": "system access and authorization bottleneck",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Prevent unauthenticated access to the catalog and material creation endpoints."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Enforce authentication on protected routes",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing authentication checks for this epic, I want to protect the catalog and creation endpoints, so that the knowledge base remains secure.",
+          "acceptanceCriteria": "Given an unauthenticated user\nWhen they attempt to access the catalog or create a material\nThen they are blocked and prompted to log in\nAnd automated E2E security tests verify the denial of access",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "unauthenticated endpoint routing vulnerability",
+          "sixSigmaMetric": "increase protected route test coverage from 0% to 100%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    }
+  ]
+}
