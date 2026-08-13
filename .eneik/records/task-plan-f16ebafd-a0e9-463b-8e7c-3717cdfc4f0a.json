@@ -1,0 +1,92 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "sixSigmaMetric": "reduce full stack startup time from >15 mins to <1 min",
+      "tocConstraintRef": "developer onboarding and verification bottleneck",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add docker-compose.yml at the repository root to start the full stack",
+        "R2: Expose a health-check endpoint for stack verification"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add docker-compose.yml for local stack",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing the docker setup for this epic, I want to define a compose file, so that the stack can be run locally with one command.",
+          "acceptanceCriteria": "Given the repository root, When running docker-compose up, Then the backend and frontend start successfully.\nGiven the running stack, When curling the health-check, Then it returns a 200 OK status.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "local environment start and health verification",
+          "sixSigmaMetric": "reduce container build and run time from >5 mins to <30 seconds",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "sixSigmaMetric": "reduce time to correct an outdated protocol from >2 hours to <5 mins",
+      "tocConstraintRef": "knowledge base accuracy maintenance bottleneck",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Add UI controls for updating existing materials",
+        "R2: Add UI controls for deleting existing materials"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement material update and delete UI",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing the update and delete UI for this epic, I want to connect the frontend to existing endpoints, so that users can manage materials.",
+          "acceptanceCriteria": "Given an existing material, When a user clicks edit and saves, Then a PUT request is made and the UI updates.\nGiven an existing material, When a user clicks delete, Then a DELETE request is made and the material disappears from the UI.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "frontend client material mutation capability",
+          "sixSigmaMetric": "reduce UI task completion time from >10 mins manual API call to <1 min",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "Authentication and Authorization",
+      "jtbd": "When accessing the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access or modification.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "decrease unauthorized access incidents from >5 per week to 0 per week",
+      "tocConstraintRef": "sensitive epidemiological data exposure bottleneck",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Block unauthenticated access to catalog and material creation endpoints",
+        "R2: Redirect unauthenticated users to a login prompt in the UI"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement authentication guard for catalog and materials",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing the authentication mechanism for this epic, I want to guard the catalog routes, so that only authenticated users can access them.",
+          "acceptanceCriteria": "Given an unauthenticated user, When they access the catalog, Then they are redirected to a login prompt.\nGiven an unauthenticated user, When they attempt to create a material, Then the action is blocked.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "catalog route and API endpoint access guard",
+          "sixSigmaMetric": "reduce unauthenticated endpoint access success rate from 100% to 0%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    }
+  ]
+}
