@@ -1,0 +1,100 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Reduce entity cataloging workaround rate from >10% to 0%",
+      "tocConstraintRef": "Material taxonomy structure bottleneck",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Validate and store protocol-specific attributes (procedural steps, author approvals) within the existing materials model.",
+        "R2: Validate and store data-specific structures (sample metrics, collection parameters) within the existing materials model."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Patch existing materials API and model for protocols and data",
+          "roleTag": "BARCAN-TAG-02",
+          "jtbd": "When implementing entity specializations for this epic, I want to patch the existing material data model and API to accept protocol and data attributes, so that the knowledge base natively supports these subtypes.",
+          "acceptanceCriteria": "Given an existing material creation endpoint, When a user submits a protocol with procedural steps, Then the system validates and stores the protocol-specific attributes.\nGiven an existing material creation endpoint, When a user submits raw data with sample metrics, Then the system validates and stores the data-specific structures.\nGiven the patched models, When QA unit and integration tests are run, Then they pass successfully verifying all material types.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Database schema normalization bottleneck",
+          "sixSigmaMetric": "Reduce distinct entity model fragmentation from >2 workarounds to 0",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "Material and Protocol Revision History",
+      "jtbd": "When an epidemiological protocol or material description is updated, I want the system to track previous versions and maintain a revision history, so that I can audit changes and revert to older versions.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "Increase revision tracking coverage from 0% to 100% of material updates",
+      "tocConstraintRef": "Auditability and clinical compliance bottleneck",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Track and maintain a history of previous versions when materials or protocols are updated.",
+        "R2: Provide access to a detailed list of historical revisions including author, time, and content."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement revision history tracking for materials",
+          "roleTag": "BARCAN-TAG-02",
+          "jtbd": "When implementing versioning for this epic, I want to patch the existing entities and endpoints to record and expose historical versions, so that auditing requirements are met.",
+          "acceptanceCriteria": "Given an existing material or protocol, When it is edited and saved, Then the previous version is stored in the revision history.\nGiven a material with history, When a user requests its revisions, Then a list showing who changed what and when is returned.\nGiven the implemented history tracking, When QA unit and E2E tests are run, Then they verify the successful retrieval of past versions.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Database update mutation constraint",
+          "sixSigmaMetric": "Reduce untracked material changes from 100% to 0%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Increase successful local deployments from <50% to 100%",
+      "tocConstraintRef": "Local environment startup bottleneck",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Diagnose and fix the root cause of the latest runtime or health check failure.",
+        "R2: Ensure the product successfully launches and passes its health check locally."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Fix runtime health check failure",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing the runtime fix for this epic, I want to patch the startup sequence or environment configuration, so that the system successfully passes health checks on launch.",
+          "acceptanceCriteria": "Given the current broken runtime state, When the fix is applied, Then the system launches without failure.\nGiven a launched system, When the health check is queried, Then it returns a healthy status.\nGiven the fixed system, When E2E startup tests are run, Then they pass successfully.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Environment startup and verification bottleneck",
+          "sixSigmaMetric": "Reduce failed launches from 100% to 0%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    }
+  ]
+}
