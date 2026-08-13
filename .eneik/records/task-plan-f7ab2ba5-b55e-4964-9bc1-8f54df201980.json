@@ -1,0 +1,98 @@
+{
+  "epics": [
+    {
+      "existingEpicId": null,
+      "title": "Distinct Models for Protocols and Data",
+      "jtbd": "When cataloging the knowledge base, I want to manage protocols and raw data with their specific structural attributes, so that researchers can search and view them as distinct entity types rather than generic text materials.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "increase distinct entity attribute schema support from 0% to 100%",
+      "tocConstraintRef": "database schema limitations for entity distinctness",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Validate and store protocol-specific attributes such as procedural steps and author approvals",
+        "R2: Validate and store epidemiological data-specific structures such as sample metrics and collection parameters"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Patch existing code to support protocol and data attributes",
+          "roleTag": "BARCAN-TAG-02",
+          "jtbd": "When implementing the distinct models for this epic, I want to patch the existing generic service and database schema directly, so that protocols and raw data attributes are supported without creating entirely new architectural layers.",
+          "acceptanceCriteria": "Given a user wants to add a protocol, when they submit the details, then the system validates and stores protocol-specific attributes, passing all integrated QA verification.\nGiven a user wants to upload epidemiological data, when they submit the data, then the system validates and stores data-specific structures, passing all QA coverage.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "existing service layer inflexibility",
+          "sixSigmaMetric": "reduce the time to accurately store and retrieve distinct entity attributes from >5 minutes to <1 second",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "Revision History for Protocols and Materials",
+      "jtbd": "When an epidemiological protocol or material description is updated, I want the system to track previous versions and maintain a revision history, so that I can audit changes and revert to older versions to ensure clinical compliance and procedural safety.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "increase the traceability of material revisions from 0% to 100% of edits",
+      "tocConstraintRef": "lack of auditability and rollback mechanisms for domain standards",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Track previous versions and maintain a revision history when protocols or materials are updated",
+        "R2: Display historical revisions with author and timestamp details, and allow viewing content of past versions"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Patch existing codebase to track and display material revision history",
+          "roleTag": "BARCAN-TAG-02",
+          "jtbd": "When implementing revision history for this epic, I want to patch the existing services to record versions, so that the history requirement is fulfilled as a single atomic change.",
+          "acceptanceCriteria": "Given an existing protocol is edited and saved, when I view its detailed page, then I can see a list of historical revisions showing who changed what and when, with all QA tests passing.\nGiven I am viewing the history list, when I select a past version, then I can view the content of that specific past version, with integrated E2E verification succeeding.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "destructive updates in the existing data layer",
+          "sixSigmaMetric": "reduce the time required to retrieve a previous version from impossible to under 1 second",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": null,
+      "tocConstraintRef": null,
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Fix the runtime launch or health check failure to ensure the product runs successfully"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Fix runtime launch and health check failures",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When fixing the local environment for this epic, I want to patch the existing configuration, so that the application starts reliably and passes health checks.",
+          "acceptanceCriteria": "Given the full stack application is starting locally, when the launch process completes, then the system remains healthy and running without crashing.\nGiven the system is running, when the health check endpoint is hit, then it responds with a success status, ensuring QA and runtime checks pass.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "broken application startup sequence",
+          "sixSigmaMetric": "increase successful local deployment rate from 0% to 100%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    }
+  ]
+}
