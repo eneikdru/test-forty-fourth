@@ -1,0 +1,86 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add a docker-compose.yml file at the repository root to start the full stack",
+        "R2: Expose a health-check endpoint via the docker-compose setup"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add docker-compose setup and health-check",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing containerization for this epic, I want to create a docker-compose.yml, so that the full stack can be started with a single command",
+          "acceptanceCriteria": "Given a local environment without docker-compose, When docker-compose up is executed, Then the full stack starts successfully.\nGiven the running stack, When the health-check endpoint is accessed by QA tests, Then it returns a healthy status.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Local setup bottleneck",
+          "sixSigmaMetric": "Reduce local setup time by 90%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Add UI functionality to update existing materials in the catalog",
+        "R2: Add UI functionality to delete existing materials from the catalog"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Patch existing UI for material update and delete",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing the update and delete UI for this epic, I want to add edit and delete actions to the existing material views, so that users can manage materials completely",
+          "acceptanceCriteria": "Given an existing material in the catalog, When the user clicks the update or delete button, Then the frontend invokes the corresponding API endpoint.\nGiven the frontend UI changes, When automated QA tests are run, Then the update and delete interactions are verified successfully.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Material management UI bottleneck",
+          "sixSigmaMetric": "Reduce time to update or delete materials by 50%",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "Authentication and Authorization Mechanism",
+      "jtbd": "When accessing the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access or modification.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "Reduce unauthorized access incidents to 0",
+      "tocConstraintRef": "System security and access bottleneck",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Block unauthenticated users from accessing the catalog or creating a material and prompt them to log in"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Patch system for authentication enforcement",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing the authentication mechanism for this epic, I want to patch the existing access paths, so that unauthorized requests are blocked and redirected to login",
+          "acceptanceCriteria": "Given an unauthenticated user, When they attempt to access protected resources, Then they are blocked and prompted to log in.\nGiven the authentication patch, When security QA tests are run, Then unauthorized access is proven to be correctly rejected.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Authentication enforcement bottleneck",
+          "sixSigmaMetric": "Increase authenticated session enforcement to 100%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    }
+  ]
+}
