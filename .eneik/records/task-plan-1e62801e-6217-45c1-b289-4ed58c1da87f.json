@@ -1,0 +1,88 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add a docker-compose.yml file at the repository root that starts the full stack.",
+        "R2: Expose a health-check endpoint for the containerized stack."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Add docker-compose.yml with health-check endpoint",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing the containerization for this epic, I want to add a docker-compose.yml that starts the full stack and exposes a health-check endpoint, so that the product can be launched and verified for real.",
+          "acceptanceCriteria": "Given a cloned repository without a running stack, When I run docker-compose up, Then the full stack starts successfully.\nGiven the stack is running, When I send a request to the health-check endpoint, Then it returns a successful status code and I write an integration test asserting this behavior.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Local development environment setup overhead",
+          "sixSigmaMetric": "Reduce local setup time to under 5 minutes",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Implement update functionality for existing epidemiological materials.",
+        "R2: Implement delete functionality for existing epidemiological materials."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Patch existing UI to support update and delete of materials",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing update and delete for this epic, I want to add edit and delete actions to the existing materials UI, so that the knowledge base accurately reflects the most current protocols.",
+          "acceptanceCriteria": "Given an existing material in the list, When the user clicks edit and saves changes, Then the frontend sends a PUT request, updates the view, and a component test verifies this behavior.\nGiven an existing material, When the user clicks delete and confirms, Then the frontend sends a DELETE request, removes it from the view, and a component test verifies this behavior.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Manual catalog maintenance bottleneck",
+          "sixSigmaMetric": "Reduce time to update or remove outdated materials to under 1 minute",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "Authentication and Authorization Mechanism",
+      "jtbd": "When accessing the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access or modification.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "Reduce unauthorized access incidents to 0",
+      "tocConstraintRef": "System security and access control bottleneck",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Implement standard authentication mechanism to verify user identity.",
+        "R2: Block unauthenticated users from accessing or modifying restricted materials."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Patch existing application with authentication checks",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing access control for this epic, I want to enforce authentication checks on existing routes, so that restricted epidemiological protocols and data are protected.",
+          "acceptanceCriteria": "Given an unauthenticated user, When they attempt to access restricted areas, Then they are blocked and prompted to log in, which is verified by an automated test.\nGiven an authenticated user, When they attempt to access restricted areas, Then they are granted access, which is verified by an automated test.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Unrestricted access vulnerability",
+          "sixSigmaMetric": "Achieve 100% interception of unauthenticated requests to restricted routes",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    }
+  ]
+}
