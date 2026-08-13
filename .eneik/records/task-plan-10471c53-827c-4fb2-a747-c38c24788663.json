@@ -1,0 +1,98 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Reduce time to catalog new protocol types from >1 week to <1 day",
+      "tocConstraintRef": "Knowledge base schema rigidity",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Validate and store protocol-specific structural attributes",
+        "R2: Validate and store epidemiological data-specific structures"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Extend existing material endpoints to support protocols and raw data",
+          "roleTag": "BARCAN-TAG-02",
+          "jtbd": "When implementing the entity structures for this epic, I want to patch the existing Java service and DTOs to support distinct protocol and raw data fields, so that the catalog can store them correctly.",
+          "acceptanceCriteria": "Given a user submits a protocol, When the backend receives the request, Then it validates procedural steps and stores them.\nGiven a user submits raw data, When the backend receives it, Then it validates sample metrics and stores them.\nGiven the need for QA, When tests are run, Then unit and integration tests successfully verify the new validation rules.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "API validation bottleneck for new data types",
+          "sixSigmaMetric": "Reduce data structure validation errors from >10% to <1%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "Protocol and Material Revision History",
+      "jtbd": "When an epidemiological protocol or material description is updated, I want the system to track previous versions and maintain a revision history, so that I can audit changes and revert to older versions to ensure clinical compliance.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "Increase the percentage of audited protocol changes from 0% to 100%",
+      "tocConstraintRef": "Lack of auditability for critical protocol changes",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Track previous versions of protocols and materials when updated",
+        "R2: Provide access to historical revisions and their content"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement version tracking and revision history for materials",
+          "roleTag": "BARCAN-TAG-02",
+          "jtbd": "When implementing revision history for this epic, I want to patch the existing API to track changes and expose previous versions, so that the frontend can display the history.",
+          "acceptanceCriteria": "Given an existing protocol is edited and saved, When the backend processes the update, Then it stores a new revision while preserving the previous version.\nGiven a user requests the history of a protocol, When the API is called, Then it returns a list of historical revisions.\nGiven the need for QA, When the integration tests run, Then they verify that previous versions are accurately tracked and retrievable.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Backend support for version history retrieval",
+          "sixSigmaMetric": "Reduce the time to retrieve historical protocol versions from >5 mins to <1 sec",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Increase successful application launch rate from 0% to 100%",
+      "tocConstraintRef": "Deployment pipeline failure blocking testing",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Fix launch failures and ensure the product passes its health check"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Fix application runtime launch and health check failures",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing the runtime fix for this epic, I want to resolve the launch failures, so that the application passes its health check and runs successfully.",
+          "acceptanceCriteria": "Given the application has launch failures, When the runtime configuration or startup code is patched, Then the application starts without crashing.\nGiven the application is running, When the health check endpoint is probed, Then it returns a healthy status.\nGiven I need to verify the fix, When I run the deployment verification, Then it automatically confirms the successful launch and health check.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Runtime crashes blocking local deployment",
+          "sixSigmaMetric": "Reduce runtime startup failures from 100% to 0%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    }
+  ]
+}
