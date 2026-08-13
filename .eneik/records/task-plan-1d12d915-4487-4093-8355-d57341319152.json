@@ -1,0 +1,92 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "sixSigmaMetric": "Decrease local environment setup time from >10 minutes to <1 minute",
+      "tocConstraintRef": "Local development onboarding bottleneck",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add a docker-compose.yml file at the repository root to start the full stack.",
+        "R2: Ensure the docker-compose stack exposes a health-check endpoint."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Create docker-compose.yml for full stack launch",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing the containerization stack for this epic, I want to add a docker-compose file with a health-check, so that the product can be launched locally and verified in one command.",
+          "acceptanceCriteria": "Given a clean repository clone, When the user runs docker-compose up, Then the full stack starts successfully, verified by automated checks.\nGiven the running stack, When the health-check endpoint is pinged, Then it returns a 200 OK status.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Containerization setup efficiency",
+          "sixSigmaMetric": "Reduce manual deployment steps from multiple commands to exactly 1 command",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "sixSigmaMetric": "Reduce time to update or delete materials from >5 minutes (DB manual) to <30 seconds (UI)",
+      "tocConstraintRef": "Catalog management manual interventions",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Provide UI functionality to update existing epidemiological materials by invoking the PUT API endpoint.",
+        "R2: Provide UI functionality to delete existing epidemiological materials by invoking the DELETE API endpoint."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement update and delete UI for materials",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing the update and delete actions for this epic, I want to patch the existing UI components, so that users can manage existing materials directly from the browser.",
+          "acceptanceCriteria": "Given an existing material, When a user edits it in the UI, Then the PUT API is called and the list updates, covered by UI tests.\nGiven an existing material, When a user deletes it, Then the DELETE API is called and the material is removed from view, covered by UI tests.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Material update UI coverage",
+          "sixSigmaMetric": "Increase UI operation coverage for catalog items from read-only to 100% CRUD",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "Authentication and Session Management",
+      "jtbd": "When accessing the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access or modification.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "Decrease unauthorized access success rate from 100% to 0%",
+      "tocConstraintRef": "Data security compliance bottleneck",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Block unauthenticated users from accessing the catalog or creating materials.",
+        "R2: Prompt unauthenticated users to log in."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement authentication checks and login prompt",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing authentication for this epic, I want to enforce session checks and display a login prompt, so that restricted epidemiological protocols are protected.",
+          "acceptanceCriteria": "Given an unauthenticated user, When they attempt to access the catalog, Then they are blocked and receive a 401/403 response, verified by auth tests.\nGiven an unauthenticated user blocked from access, When they are redirected, Then they are prompted to log in via the UI, verified by UI tests.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Unauthenticated access vulnerability",
+          "sixSigmaMetric": "Reduce unauthenticated session lifespan to 0 seconds",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    }
+  ]
+}
