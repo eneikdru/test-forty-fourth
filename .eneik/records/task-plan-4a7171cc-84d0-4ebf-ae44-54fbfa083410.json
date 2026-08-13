@@ -1,0 +1,94 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Reduce distinct entity data structure omissions from >0% to 0%",
+      "tocConstraintRef": "Material entity representation bottleneck",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Extend the existing generic material implementation to support distinct protocol and data entities with specific structural attributes."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Patch backend to support distinct protocol and data structures",
+          "roleTag": "BARCAN-TAG-02",
+          "jtbd": "When implementing distinct protocol and data entities support for this epic, I want to patch the existing Java service and DTO layers, so that researchers can search and view them as distinct entity types without a new schema.",
+          "acceptanceCriteria": "Given the existing generic material endpoints, When a user submits protocol-specific or data-specific attributes, Then the backend validates and stores these distinct structures.\nGiven the implementation is complete, When the backend tests are run, Then unit, integration, and E2E tests verify the structural attributes and their searchability.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Backend service validation bottleneck",
+          "sixSigmaMetric": "Decrease distinct entity structure validation failures from >0% to 0%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Reduce untracked protocol changes from >0% to 0%",
+      "tocConstraintRef": "Material version tracking bottleneck",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Implement tracking and retrieval of historical revisions for epidemiological protocols and materials."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Patch backend to track and retrieve revision history",
+          "roleTag": "BARCAN-TAG-02",
+          "jtbd": "When implementing versioning for this epic, I want to patch the existing code to track previous versions, so that revisions can be audited and reverted.",
+          "acceptanceCriteria": "Given an existing protocol is edited and saved, When its detailed page data is requested, Then the system returns a list of historical revisions showing who changed what and when.\nGiven the implementation is complete, When the backend tests are run, Then unit, integration, and E2E tests verify revision tracking and retrieval of past versions.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Backend version control persistence bottleneck",
+          "sixSigmaMetric": "Decrease untracked revision changes from >0% to 0%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "title": null,
+      "jtbd": null,
+      "kanoClass": null,
+      "cynefinDomain": null,
+      "sixSigmaMetric": "Reduce application runtime launch failures from >0% to 0%",
+      "tocConstraintRef": "System runtime health bottleneck",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Fix launch and health check failures to ensure a healthy application runtime."
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Fix application launch and health check failure",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When repairing the product runtime for this epic, I want to fix the launch or health check failure, so that the full stack can be started and verified.",
+          "acceptanceCriteria": "Given the application stack is configured, When the launch command is executed, Then the product starts successfully without runtime failures.\nGiven the application is running, When the health check is probed, Then it returns a healthy status, verified by end-to-end start up tests.",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Container startup and health probe bottleneck",
+          "sixSigmaMetric": "Decrease failed health checks and launch failures from 100% to 0%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1"
+          ]
+        }
+      ]
+    }
+  ]
+}
