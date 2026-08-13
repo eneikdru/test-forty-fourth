@@ -1,0 +1,92 @@
+{
+  "epics": [
+    {
+      "existingEpicId": "9abcb075-4d03-4d3a-9fd0-1e542b28b881",
+      "sixSigmaMetric": "Reduce local environment setup time from 30 minutes to 1 minute",
+      "tocConstraintRef": "Local development onboarding bottleneck",
+      "sourceIndex": 0,
+      "requirements": [
+        "R1: Add docker-compose.yml to start full stack",
+        "R2: Expose health-check endpoint"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Create docker-compose.yml for full stack",
+          "roleTag": "BARCAN-TAG-05",
+          "jtbd": "When implementing containerization for this epic, I want to add a docker-compose.yml with a health-check, so that the product can be launched and verified for real",
+          "acceptanceCriteria": "Given an environment without Docker running, When a user runs docker-compose up, Then the full stack starts successfully\nGiven the stack is running, When a user accesses the health-check endpoint, Then it returns a 200 OK status",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Local docker-compose configuration bottleneck",
+          "sixSigmaMetric": "Increase local deployment success rate to 100%",
+          "hasUi": false,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": "0cb655ee-b6c4-4aa6-ad36-50065f98eec6",
+      "sixSigmaMetric": "Reduce material update cycle time from days to minutes",
+      "tocConstraintRef": "Material cataloging management bottleneck",
+      "sourceIndex": 1,
+      "requirements": [
+        "R1: Add frontend UI support for updating materials",
+        "R2: Add frontend UI support for deleting materials"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Implement update and delete UI for materials",
+          "roleTag": "BARCAN-TAG-11",
+          "jtbd": "When implementing the management UI for this epic, I want to add update and delete buttons that call existing APIs, so that the knowledge base accurately reflects the most current protocols",
+          "acceptanceCriteria": "Given an existing material in the catalog, When a user edits it via the UI, Then the frontend sends a PUT request to the existing API\nGiven an existing material, When a user deletes it via the UI, Then the frontend sends a DELETE request and removes it from the list",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Frontend material management UI bottleneck",
+          "sixSigmaMetric": "Decrease obsolete material presence in UI to 0",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    },
+    {
+      "existingEpicId": null,
+      "title": "System Authentication and Authorization",
+      "jtbd": "When accessing the knowledge base, I want to authenticate my identity, so that restricted epidemiological protocols and data are protected from unauthorized access or modification.",
+      "kanoClass": "Must-Be",
+      "cynefinDomain": "clear",
+      "sixSigmaMetric": "Reduce unauthorized access incidents to 0",
+      "tocConstraintRef": "Unauthenticated access security bottleneck",
+      "sourceIndex": 2,
+      "requirements": [
+        "R1: Block unauthenticated access to the catalog",
+        "R2: Prompt unauthenticated users to log in"
+      ],
+      "coverageComplete": true,
+      "slices": [
+        {
+          "title": "Enforce authentication on restricted routes",
+          "roleTag": "BARCAN-TAG-07",
+          "jtbd": "When implementing access control for this epic, I want to enforce authentication on catalog and creation routes, so that restricted epidemiological protocols and data are protected",
+          "acceptanceCriteria": "Given an unauthenticated user, When they attempt to access the catalog, Then they are blocked and prompted to log in\nGiven an unauthenticated user, When they attempt to create a material, Then they are blocked and prompted to log in",
+          "leanValue": "essential",
+          "cynefinDomain": "clear",
+          "tocConstraintRef": "Route protection configuration bottleneck",
+          "sixSigmaMetric": "Increase authenticated session enforcement to 100%",
+          "hasUi": true,
+          "requirementRefs": [
+            "R1",
+            "R2"
+          ]
+        }
+      ]
+    }
+  ]
+}
